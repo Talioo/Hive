@@ -7,5 +7,10 @@ public class SOHexaInfo : ScriptableObject
 {
     public GameObject hexaPrefab;
 
-    public List<HexaCell> cellsOnScene;
+    [SerializeField] private List<HexaCell> cellsOnScene;
+
+    public void AddNewCell(HexaCell cell)
+    {
+        cellsOnScene.Add(cell);
+    }
 }

@@ -2,21 +2,25 @@
 
 public class HexaCell : MonoBehaviour
 {
-    [SerializeField] SOHexaInfo hexaInfo;
-    [SerializeField] CellParams cellParams;
+    [SerializeField] private SOHexaInfo hexaInfo;
+    [SerializeField] private CellParams cellParams;
 
     private void Start()
     {
-        if (!cellParams.IsEmpty) hexaInfo.cellsOnScene.Add(this);
+        if (!cellParams.IsEmpty) hexaInfo.AddNewCell(this);
     }
     private void OnMouseDown()
     {
         if(cellParams.IsEmpty)
         {
-            Instantiate(hexaInfo.hexaPrefab, transform.position, transform.rotation);
-            cellParams.IsEmpty = false;
-            hexaInfo.cellsOnScene.Add(this);
+            CreateNewCell();
         }
+    }
+    private void CreateNewCell()
+    {
+        Instantiate(hexaInfo.hexaPrefab, transform.position, transform.rotation);
+        cellParams.IsEmpty = false;
+        hexaInfo.AddNewCell(this);
     }
 }
 [System.Serializable]
