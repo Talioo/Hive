@@ -4,17 +4,32 @@ public class HexaCell : MonoBehaviour
 {
     [SerializeField] private SOHexaInfo hexaInfo;
     [SerializeField] private CellParams cellParams;
+    [SerializeField] private GameManager gameManager;
+
+    public bool IsFree { get { return cellParams.IsEmpty; } }
+
+    private Collider collider;
+    private SpriteRenderer sprite;
+    private bool readyToUse = false;
 
     private void Start()
     {
-        if (!cellParams.IsEmpty) hexaInfo.AddNewCell(this);
+        sprite = GetComponent<SpriteRenderer>();
+        collider = GetComponent<Collider>();
+        hexaInfo.AddNewCell(this);
     }
     private void OnMouseDown()
     {
-        if(cellParams.IsEmpty)
-        {
-            CreateNewCell();
-        }
+        if (readyToUse) gameManager.selectedHiveMember.Move(this);
+    }
+    public void ColliderActive(bool active)
+    {
+        collider.enabled = active;
+    }
+    public void ReadyToUse(bool _readyToUse)
+    {
+        readyToUse = _readyToUse;
+        sprite.color = readyToUse ? Color.blue : Color.white;
     }
     private void CreateNewCell()
     {
