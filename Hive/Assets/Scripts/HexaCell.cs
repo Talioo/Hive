@@ -13,7 +13,8 @@ public class HexaCell : MonoBehaviour
     {
         if(cellParams.IsEmpty)
         {
-            CreateNewCell();
+            SOInstances.UIController.Aprove();
+            //CreateNewCell();
         }
     }
     private void CreateNewCell()
