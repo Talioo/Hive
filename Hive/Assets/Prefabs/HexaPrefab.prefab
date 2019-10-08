@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3809139465530858718}
   - component: {fileID: 3809139465530858713}
   - component: {fileID: 3809139465530858712}
-  - component: {fileID: 3809139465530858719}
+  - component: {fileID: 7256602463463536019}
+  - component: {fileID: 1995222166}
   m_Layer: 0
   m_Name: Hexagon_1.svg (3)
   m_TagString: Untagged
@@ -89,12 +90,12 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3809139465530858717}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.85
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3809139465530858719
+--- !u!114 &7256602463463536019
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,12 +104,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3809139465530858717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 916245345866bb04da705edcb203f1b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 61643df8ca752984481f5d9329714c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
-  cellParams:
-    IsEmpty: 1
+  masterCell: {fileID: 3809139467244367457}
+--- !u!54 &1995222166
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3809139465530858717}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &3809139466234780267
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +135,8 @@ GameObject:
   - component: {fileID: 3809139466234780260}
   - component: {fileID: 3809139466234780263}
   - component: {fileID: 3809139466234780262}
-  - component: {fileID: 3809139466234780261}
+  - component: {fileID: 4871543457064225915}
+  - component: {fileID: 720184430}
   m_Layer: 0
   m_Name: Hexagon_1.svg (5)
   m_TagString: Untagged
@@ -198,12 +214,12 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3809139466234780267}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.85
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3809139466234780261
+--- !u!114 &4871543457064225915
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,12 +228,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3809139466234780267}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 916245345866bb04da705edcb203f1b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 61643df8ca752984481f5d9329714c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
-  cellParams:
-    IsEmpty: 1
+  masterCell: {fileID: 3809139467244367457}
+--- !u!54 &720184430
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3809139466234780267}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &3809139466685519359
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +259,8 @@ GameObject:
   - component: {fileID: 3809139466685519352}
   - component: {fileID: 3809139466685519355}
   - component: {fileID: 3809139466685519354}
-  - component: {fileID: 3809139466685519353}
+  - component: {fileID: 6276028024402332805}
+  - component: {fileID: 1151353796}
   m_Layer: 0
   m_Name: Hexagon_1.svg (4)
   m_TagString: Untagged
@@ -307,12 +338,12 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3809139466685519359}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.85
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3809139466685519353
+--- !u!114 &6276028024402332805
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -321,12 +352,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3809139466685519359}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 916245345866bb04da705edcb203f1b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 61643df8ca752984481f5d9329714c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
-  cellParams:
-    IsEmpty: 1
+  masterCell: {fileID: 3809139467244367457}
+--- !u!54 &1151353796
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3809139466685519359}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &3809139467006538054
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +383,8 @@ GameObject:
   - component: {fileID: 3809139467006538055}
   - component: {fileID: 3809139467006538050}
   - component: {fileID: 3809139467006538049}
-  - component: {fileID: 3809139467006538048}
+  - component: {fileID: 833813086059810906}
+  - component: {fileID: 765715331}
   m_Layer: 0
   m_Name: Hexagon_1.svg (2)
   m_TagString: Untagged
@@ -416,12 +462,12 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3809139467006538054}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.85
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3809139467006538048
+--- !u!114 &833813086059810906
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -430,12 +476,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3809139467006538054}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 916245345866bb04da705edcb203f1b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 61643df8ca752984481f5d9329714c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
-  cellParams:
-    IsEmpty: 1
+  masterCell: {fileID: 3809139467244367457}
+--- !u!54 &765715331
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3809139467006538054}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &3809139467043249421
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,7 +507,8 @@ GameObject:
   - component: {fileID: 3809139467043249423}
   - component: {fileID: 3809139467043249422}
   - component: {fileID: 3809139467043249417}
-  - component: {fileID: 3809139467043249416}
+  - component: {fileID: 1837416735526052170}
+  - component: {fileID: 61153293}
   m_Layer: 0
   m_Name: Hexagon_1.svg (1)
   m_TagString: Untagged
@@ -525,12 +586,12 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3809139467043249421}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.85
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3809139467043249416
+--- !u!114 &1837416735526052170
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -539,12 +600,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3809139467043249421}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 916245345866bb04da705edcb203f1b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 61643df8ca752984481f5d9329714c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
-  cellParams:
-    IsEmpty: 1
+  masterCell: {fileID: 3809139467244367457}
+--- !u!54 &61153293
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3809139467043249421}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &3809139467150465341
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,7 +631,8 @@ GameObject:
   - component: {fileID: 3809139467150465342}
   - component: {fileID: 3809139467150465337}
   - component: {fileID: 3809139467150465336}
-  - component: {fileID: 3809139467150465343}
+  - component: {fileID: 2506390698407042103}
+  - component: {fileID: 863584914}
   m_Layer: 0
   m_Name: Hexagon_1.svg (6)
   m_TagString: Untagged
@@ -634,12 +710,12 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3809139467150465341}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.85
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3809139467150465343
+--- !u!114 &2506390698407042103
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -648,12 +724,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3809139467150465341}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 916245345866bb04da705edcb203f1b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 61643df8ca752984481f5d9329714c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
-  cellParams:
-    IsEmpty: 1
+  masterCell: {fileID: 3809139467244367457}
+--- !u!54 &863584914
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3809139467150465341}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &3809139467244367461
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,7 +755,8 @@ GameObject:
   - component: {fileID: 3809139467244367463}
   - component: {fileID: 3809139467244367462}
   - component: {fileID: 3809139467244367457}
-  - component: {fileID: 3809139467244367456}
+  - component: {fileID: 779279876467847042}
+  - component: {fileID: 8494371824296164337}
   m_Layer: 0
   m_Name: HexaPrefab
   m_TagString: Untagged
@@ -754,10 +845,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
-  cellParams:
-    IsEmpty: 0
---- !u!135 &3809139467244367456
-SphereCollider:
+  neighbours: []
+  isMarked: 0
+--- !u!136 &779279876467847042
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -766,6 +857,23 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.85
+  m_Radius: 0.92
+  m_Height: 2.5
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &8494371824296164337
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3809139467244367461}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
