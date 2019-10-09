@@ -10,7 +10,8 @@ public class HiveMember : MonoBehaviour
 
     public virtual void Move(HexaCell newCell)
     {
-        if (MoveType == MoveType.Crawl) StartCoroutine(CrawlToTarget(newCell));
+        if (MoveType == MoveType.Crawl)
+            StartCoroutine(CrawlToTarget(newCell));
     }
     IEnumerator CrawlToTarget(HexaCell newCell)
     {

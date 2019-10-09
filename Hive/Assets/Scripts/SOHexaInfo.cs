@@ -17,9 +17,7 @@ public class SOHexaInfo : ScriptableObject
     }
     public List<HexaCell> GetFreeCells()
     {
-        List<HexaCell> freeCells = new List<HexaCell>();
-        cellsOnScene.ForEach(x => { if (x.IsFree) freeCells.Add(x); });
-        return freeCells;
+        return cellsOnScene.FindAll(x=> x.IsFree);
     }
     public static void UncheckCells()
     {

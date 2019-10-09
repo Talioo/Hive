@@ -9,35 +9,16 @@ public class QueenBee : HiveMember
 
     void OnMouseDown()
     {
-        //TODO: Move to constants
-        GetCell(transform.position + (Vector3.back * 2));
-        GetCell(transform.position + (Vector3.back + Vector3.right * 2));
-        GetCell(transform.position + (Vector3.back + Vector3.left * 2));
-        GetCell(transform.position + (Vector3.forward * 2));
-        GetCell(transform.position + (Vector3.forward + Vector3.right * 2));
-        GetCell(transform.position + (Vector3.forward + Vector3.left * 2));
+        //TODO: Use neighbours from #13
     }
-    void GetCell(Vector3 position)
+    void GetCell()
     {
-        RaycastHit[] raycastHit = Physics.RaycastAll(transform.position, position, 100f);
-
-        print(raycastHit.Length);
-        if (raycastHit.Length < 1) return;
-        foreach (var item in raycastHit)
+        //TODO: Use neighbours from #13 to form list
+        List<HexaCell> hexaCells = new List<HexaCell>();
+        if (hexaCells.Count < 1) return;
+        foreach (var item in hexaCells)
         {
-            var cell = item.collider.GetComponent<HexaCell>();
-            if (cell == null) continue;
-            if (cell.IsFree) cell.ReadyToUse(true);
+            if (item.IsFree) item.ReadyToUse(true);
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(transform.position, transform.position + (Vector3.back * 2));
-        Gizmos.DrawLine(transform.position, transform.position + (Vector3.back + Vector3.right * 2));
-        Gizmos.DrawLine(transform.position, transform.position + (Vector3.back + Vector3.left * 2));
-        Gizmos.DrawLine(transform.position, transform.position + (Vector3.forward * 2));
-        Gizmos.DrawLine(transform.position, transform.position + (Vector3.forward + Vector3.right * 2));
-        Gizmos.DrawLine(transform.position, transform.position + (Vector3.forward + Vector3.left * 2));
     }
 }
