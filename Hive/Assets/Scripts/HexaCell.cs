@@ -14,7 +14,6 @@ public class HexaCell : MonoBehaviour
         if(cellParams.IsEmpty)
         {
             SOInstances.UIController.Aprove();
-            //CreateNewCell();
         }
     }
     private void CreateNewCell()

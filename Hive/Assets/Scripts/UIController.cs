@@ -16,7 +16,7 @@ public class UIController : MonoBehaviour
     {
         if (waitingForAprove != null) return;
         spawningMember = member;
-        Shining.Show(member.transform.position);
+        SOInstances.Shining.Show(member.transform.position);
         waitingForAprove = WaitingForAprove();
         StartCoroutine(waitingForAprove);
     }
@@ -29,7 +29,7 @@ public class UIController : MonoBehaviour
     }
     public void Cancel()
     {
-        Shining.Hide();
+        SOInstances.Shining.Hide();
         waitingForAprove = null;
 
     }

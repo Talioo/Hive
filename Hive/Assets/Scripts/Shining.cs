@@ -1,23 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Shining : MonoBehaviour
 {
-    private static Image image;
+    [SerializeField] private Image image;
 
-    void Start()
+    private void Awake()
     {
-        image = GetComponent<Image>();
+        SOInstances.SetInstance(this);
         Hide();
     }
-
-    public static void Hide()
+    public void Hide()
     {
         image.enabled = false;
     }
-    public static void Show(Vector3 position)
+    public void Show(Vector3 position)
     {
         image.gameObject.transform.position = position;
         image.enabled = true;
