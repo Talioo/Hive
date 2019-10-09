@@ -37,4 +37,12 @@ public class SOHexaInfo : ScriptableObject
     {
         cellsOnScene.Remove(cell);
     }
+    public List<HexaCell> GetFreeCells()
+    {
+        return cellsOnScene.FindAll(x => x.IsFree);
+    }
+    public void UncheckCells()
+    {
+        cellsOnScene.ForEach(x => x.ReadyToUse(false));
+    }
 }

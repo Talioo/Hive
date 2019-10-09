@@ -3,22 +3,23 @@ using UnityEngine;
 
 public class HexaCell : MonoBehaviour
 {
-    [SerializeField] private SOHexaInfo hexaInfo;
+    public SOHexaInfo hexaInfo;
     public List<HexaCell> neighbours;
+    public List<EmptyCell> availableCells;
     public bool isMarked = false;
-
+    public bool IsFree { get { return CheckIsEmpty(); } }
     private void Start()
     {
         hexaInfo.AddNewCell(this);
-        Collider collider = new Collider();
     }
     private void OnMouseDown()
     {
         hexaInfo.NeedToRemove(this);
     }
-    public void CreateNewCell(EmptyCell emptyCell)
+    public void ReadyToUse(bool _readyToUse)
     {
-        Instantiate(hexaInfo.hexaPrefab, emptyCell.transform.position, transform.rotation);
+        RemoveCell();
+        availableCells.ForEach(x => x.ReadyToUse(_readyToUse));
     }
     public void RemoveCell()
     {

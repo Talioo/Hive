@@ -4,6 +4,7 @@ public class SOInstances : ScriptableObject
 {
     public static UIController UIController { get; private set; }
     public static Shining Shining { get; private set; }
+    public static GameManager GameManager { get; private set; }
 
     public static void SetInstance(UIController _UIController)
     {
@@ -22,6 +23,15 @@ public class SOInstances : ScriptableObject
         }
         else
             Destroy(_Shining.gameObject);
+    }
+    public static void SetInstance(GameManager _GameManager)
+    {
+        if (GameManager == null)
+        {
+            GameManager = _GameManager;
+        }
+        else
+            Destroy(_GameManager.gameObject);
     }
 
 }
