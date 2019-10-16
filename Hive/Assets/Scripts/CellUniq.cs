@@ -9,6 +9,8 @@ public class CellUniq : MonoBehaviour
     private Vector3 uniqPos;
     private SODuplicateCells duplicateCellsSO;
 
+    private const float distance = 0.2f;
+
     public CellUniq(EmptyCell emptyCell, SODuplicateCells duplicateCells)
     {
         duplicatedCellsList = new List<EmptyCell>();
@@ -19,7 +21,7 @@ public class CellUniq : MonoBehaviour
     }
     public bool IsOnMyPosition(EmptyCell emptyCell)
     {
-        var value = Vector3.Distance(uniqPos, emptyCell.transform.position) < 0.2f;
+        var value = Vector3.Distance(uniqPos, emptyCell.transform.position) < distance;
         if (value)
         {
             if (uniqueCell == null)

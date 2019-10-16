@@ -9,6 +9,7 @@ public class HiveMember : MonoBehaviour
     public MoveType MoveType;
     public HexaCell myCell;
 
+    protected float moveSpeed = 2;
     public void OnMouseDown()
     {
         if (SOInstances.GameManager.selectedHiveMember != null)
@@ -31,7 +32,7 @@ public class HiveMember : MonoBehaviour
         Vector3 target = newCell.transform.position;
         while (transform.position != target)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target, 2 * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
             yield return null;
         }
         hexaInfo.TryToRemoveCells();

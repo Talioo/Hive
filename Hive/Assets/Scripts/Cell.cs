@@ -5,9 +5,10 @@ using UnityEngine;
 public class Cell : MonoBehaviour
 {
     public SOHexaInfo hexaInfo;
-    [HideInInspector] public SpriteRenderer sprite;
     [HideInInspector] public bool readyToUse = false;
-    Color startColor;
+    private SpriteRenderer sprite;
+    private Color startColor;
+    private const float rayLenght = 100f;
     public virtual void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
@@ -25,17 +26,17 @@ public class Cell : MonoBehaviour
         if (readyToUse)
         {
             sprite.color = Color.blue;
-            sprite.sortingOrder += 1;
+            sprite.sortingOrder++;
         }
         else
         {
             sprite.color = startColor;
-            sprite.sortingOrder -= 1;
+            sprite.sortingOrder--;
         }
     }
     public bool CheckIsEmpty()
     {
-        RaycastHit[] raycastHit = Physics.RaycastAll(transform.position + Vector3.down * 5, Vector3.up, 100f);
+        RaycastHit[] raycastHit = Physics.RaycastAll(transform.position + Vector3.down, Vector3.up, rayLenght);
         return raycastHit.Length == 0;
     }
     public virtual void OnDestroy()

@@ -22,7 +22,7 @@ public class Beetle : HiveMember
             target.y = startPos.y;
         while (transform.position != target)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target, 2 * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
             yield return null;
         }
         target.y = startPos.y;
