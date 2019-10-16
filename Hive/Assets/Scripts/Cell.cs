@@ -13,7 +13,6 @@ public class Cell : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         startColor = sprite.color;
         hexaInfo.AddNewCell(this);
-        hexaInfo.CheckEmpties();
     }
     public void OnMouseDown()
     {
@@ -37,10 +36,6 @@ public class Cell : MonoBehaviour
     public bool CheckIsEmpty()
     {
         RaycastHit[] raycastHit = Physics.RaycastAll(transform.position + Vector3.down * 5, Vector3.up, 100f);
-        foreach (var item in raycastHit)
-        {
-            print(item.rigidbody.gameObject.name);
-        }
         return raycastHit.Length == 0;
     }
     public virtual void OnDestroy()

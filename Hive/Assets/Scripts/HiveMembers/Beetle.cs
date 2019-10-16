@@ -28,13 +28,12 @@ public class Beetle : HiveMember
         target.y = startPos.y;
         hexaInfo.TryToRemoveCells();
         yield return null;
-        hexaInfo.CleanCellsList();
         if (newCell is HexaCell)
             myCell = newCell as HexaCell;
         else
             myCell = hexaInfo.CreateNewCell(target);
         SOInstances.GameManager.selectedHiveMember = null;
         yield return null;
-        hexaInfo.CheckEmpties();
+        hexaInfo.duplicateCells.RestructCells();
     }
 }

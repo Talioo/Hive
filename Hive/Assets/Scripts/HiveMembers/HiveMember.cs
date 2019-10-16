@@ -36,11 +36,10 @@ public class HiveMember : MonoBehaviour
         }
         hexaInfo.TryToRemoveCells();
         yield return null;
-        hexaInfo.CleanCellsList();
         myCell = hexaInfo.CreateNewCell(target);
         SOInstances.GameManager.selectedHiveMember = null;
         yield return null;
-        hexaInfo.CheckEmpties();
+        hexaInfo.duplicateCells.RestructCells();
     }
     public virtual void MarkCellsToMove()
     {

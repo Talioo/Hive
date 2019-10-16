@@ -7,10 +7,11 @@ public class EmptyCell : Cell
     public List<HexaCell> masterCell;
     private bool alreadyTaken = false;
 
-    public void AddNewMasterCell(HexaCell cell)
+    public void AddNewMasterCell(EmptyCell cell)
     {
-        if(masterCell.Find(x => x == cell) == null)
-            masterCell.Add(cell);
+        cell.masterCell[0].AddEmptyCell(this);
+        if (masterCell.Find(x => x == cell) == null)
+            masterCell.Add(cell.masterCell[0]);
     }
     public void RemoveMasterCell(HexaCell cell)
     {
@@ -29,7 +30,8 @@ public class EmptyCell : Cell
     }
     public override void ReadyToUse(bool value)
     {
-        if (alreadyTaken && value) return;
+        if (alreadyTaken && value)
+            return;
         base.ReadyToUse(value);
     }
 }

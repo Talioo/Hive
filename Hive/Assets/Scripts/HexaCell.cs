@@ -15,6 +15,7 @@ public class HexaCell : Cell
     {
         base.Start();
         hiveMembersOnMe = new List<HiveMember>();
+        hexaInfo.OnRemoveCells += RemoveCells;
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -27,7 +28,7 @@ public class HexaCell : Cell
         else
         {
             var neighbour = collision.gameObject.GetComponent<HexaCell>();
-            if(neighbour != null)
+            if (neighbour != null)
                 neighbours.Add(neighbour);
         }
     }
@@ -41,6 +42,7 @@ public class HexaCell : Cell
     {
         neighbours.ForEach(x => x.RemoveMe(this));
         availableCells.ForEach(x => x.RemoveMasterCell(this));
+        hexaInfo.OnRemoveCells -= RemoveCells;
         base.OnDestroy();
     }
     #endregion
@@ -62,15 +64,7 @@ public class HexaCell : Cell
         }
         availableCells.Add(emptyCell);
     }
-    public void RemoveEmptyCell()
-    {
-        availableCells.RemoveAll(x => x == null);
-    }
-    public void TryToRemoveCell()
-    {
-        if (hiveMembersOnMe.Count == 0)
-            Destroy(gameObject);
-    }
+    
     public void FindNeighbour()
     {
         isMarked = true;
@@ -89,6 +83,19 @@ public class HexaCell : Cell
         if (!hexaInfo.CanRemoveCell(this)) return false;
         if (hiveMembersOnMe.Count == 0) return true;
         return hiveMembersOnMe[hiveMembersOnMe.Count - 1] == member;
+    }
+    #endregion
+    #region Private methods
+    private void RemoveCells()
+    {
+        availableCells.RemoveAll(x => x == null);
+        SetReadyToUseToEmpty(false);
+        TryToRemoveCell();
+    }
+    private void TryToRemoveCell()
+    {
+        if (hiveMembersOnMe.Count == 0)
+            Destroy(gameObject);
     }
     #endregion
 }
