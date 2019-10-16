@@ -6,7 +6,7 @@ public class SOHexaInfo : ScriptableObject
 {
     public GameObject hexaPrefab;
 
-    [SerializeField] private List<HexaCell> hexaCellsOnScene;
+    public List<HexaCell> hexaCellsOnScene { get; private set; }
     [SerializeField] private List<List<EmptyCell>> emptyCellsOnSceneList;
     private void OnEnable()
     {

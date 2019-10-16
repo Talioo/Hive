@@ -8,6 +8,10 @@ public class UIController : MonoBehaviour
 {
     private UIMember spawningMember;
     IEnumerator waitingForAprove;
+
+    public delegate void NewMemberSpawn(bool value);
+    public event NewMemberSpawn OnNewMemberSpawning;
+
     private void Awake()
     {
         SOInstances.SetInstance(this);
@@ -15,23 +19,25 @@ public class UIController : MonoBehaviour
     public void SpawnHiveMember(UIMember member)
     {
         if (waitingForAprove != null) return;
+        OnNewMemberSpawning.Invoke(true);
         spawningMember = member;
         SOInstances.Shining.Show(member.transform.position);
         waitingForAprove = WaitingForAprove();
         StartCoroutine(waitingForAprove);
     }
-    public void Aprove()
+    public void Aprove(Cell cell)
     {
         if (waitingForAprove == null) return;
         StopCoroutine(waitingForAprove);
-        waitingForAprove = null;
+        Instantiate(spawningMember.spavningPrefab, cell.transform.position, cell.transform.rotation);
         spawningMember.AproveSpawning();
+        HideSpawningElements();
     }
-    public void Cancel()
+    public void HideSpawningElements()
     {
         SOInstances.Shining.Hide();
         waitingForAprove = null;
-
+        OnNewMemberSpawning.Invoke(false);
     }
     IEnumerator WaitingForAprove()
     {
@@ -41,7 +47,7 @@ public class UIController : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 yield return new WaitForSeconds(0.1f);
-                Cancel();
+                HideSpawningElements();
                 break;
             }
         }

@@ -5,8 +5,9 @@ using UnityEngine;
 public class Beetle : HiveMember
 {
     Vector3 startPos;
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         startPos = transform.position;
     }
     public override void MarkCellsToMove()
@@ -28,13 +29,24 @@ public class Beetle : HiveMember
         target.y = startPos.y;
         hexaInfo.TryToRemoveCells();
         yield return null;
-        hexaInfo.CleanCellsList();
         if (newCell is HexaCell)
-            myCell = newCell as HexaCell;
+            NewMemberPosition(target, newCell as HexaCell);
         else
-            myCell = hexaInfo.CreateNewCell(target);
+            NewMemberPosition(target);
+
+    }
+    public override void NewMemberPosition(Vector3 target)
+    {
+        hexaInfo.CleanCellsList();
+        myCell = hexaInfo.CreateNewCell(target);
         SOInstances.GameManager.selectedHiveMember = null;
-        yield return null;
+        hexaInfo.CheckEmpties();
+    }
+    public void NewMemberPosition(Vector3 target, HexaCell newCell)
+    {
+        hexaInfo.CleanCellsList();
+        myCell = newCell;
+        SOInstances.GameManager.selectedHiveMember = null;
         hexaInfo.CheckEmpties();
     }
 }

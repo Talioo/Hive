@@ -6,15 +6,15 @@ public class HexaCell : Cell
     #region Parametrs
     [SerializeField] private List<HexaCell> neighbours;
     [SerializeField] public List<EmptyCell> availableCells;
-    public List<HiveMember> hiveMembersOnMe { get; private set; }
     public bool isMarked = false;
     public bool IsFree { get { return hiveMembersOnMe.Count == 0; } }
     #endregion
     #region Unity methods
-    public override void Start()
+    protected override void Start()
     {
+        if (hexaInfo.hexaCellsOnScene.Count == 0)
+            availableCells.ForEach(x => x.gameObject.SetActive(false));
         base.Start();
-        hiveMembersOnMe = new List<HiveMember>();
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -86,8 +86,10 @@ public class HexaCell : Cell
     }
     public bool CanIMove(HiveMember member)
     {
-        if (!hexaInfo.CanRemoveCell(this)) return false;
-        if (hiveMembersOnMe.Count == 0) return true;
+        //if (!hexaInfo.CanRemoveCell(this))
+        //    return false;
+        if (hiveMembersOnMe.Count == 0)
+            return true;
         return hiveMembersOnMe[hiveMembersOnMe.Count - 1] == member;
     }
     #endregion
