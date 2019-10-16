@@ -6,7 +6,6 @@ public class HexaCell : Cell
     #region Parametrs
     [SerializeField] private List<HexaCell> neighbours;
     [SerializeField] public List<EmptyCell> availableCells;
-    public List<HiveMember> hiveMembersOnMe { get; private set; }
     public bool isMarked = false;
     public bool IsFree { get { return hiveMembersOnMe.Count == 0; } }
     #endregion
@@ -14,7 +13,6 @@ public class HexaCell : Cell
     public override void Start()
     {
         base.Start();
-        hiveMembersOnMe = new List<HiveMember>();
         hexaInfo.OnRemoveCells += RemoveCells;
     }
     private void OnCollisionEnter(Collision collision)
@@ -80,8 +78,11 @@ public class HexaCell : Cell
     }
     public bool CanIMove(HiveMember member)
     {
-        if (!hexaInfo.CanRemoveCell(this)) return false;
-        if (hiveMembersOnMe.Count == 0) return true;
+        //@TODO: Add better algoritm to find if cell cen be removed
+        //if (!hexaInfo.CanRemoveCell(this))
+        //    return false;
+        if (hiveMembersOnMe.Count == 0)
+            return true;
         return hiveMembersOnMe[hiveMembersOnMe.Count - 1] == member;
     }
     #endregion

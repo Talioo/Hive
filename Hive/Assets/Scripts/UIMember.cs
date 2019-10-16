@@ -15,7 +15,6 @@ public class UIMember : MonoBehaviour
     }
     public void SpawnMe()
     {
-        print("SpawnMe");
         SOInstances.UIController.SpawnHiveMember(this);
     }
     public void AproveSpawning()

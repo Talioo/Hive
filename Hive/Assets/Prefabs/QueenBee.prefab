@@ -126,4 +126,4 @@ MonoBehaviour:
   hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
   MemberType: 0
   MoveType: 0
-  myCell: {fileID: 3809139467244367457, guid: 0c818ab3503f3ba47a36fca8a0180483, type: 3}
+  myCell: {fileID: 0}

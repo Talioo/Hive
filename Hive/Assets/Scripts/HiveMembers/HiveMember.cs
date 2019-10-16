@@ -10,17 +10,21 @@ public class HiveMember : MonoBehaviour
     public HexaCell myCell;
 
     protected float moveSpeed = 2;
+    protected virtual void Start()
+    {
+        if (myCell == null)
+            myCell = hexaInfo.CreateNewCell(transform.position);
+        hexaInfo.duplicateCells.RestructCells();
+    }
     public void OnMouseDown()
     {
+        hexaInfo.duplicateCells.RestructCells();
         if (SOInstances.GameManager.selectedHiveMember != null)
-        {
-            hexaInfo.TryToRemoveCells();
-            SOInstances.GameManager.selectedHiveMember = null;
-        }
+            return;
         if (!myCell.CanIMove(this))
             return;
-        MarkCellsToMove();
         SOInstances.GameManager.selectedHiveMember = this;
+        MarkCellsToMove();
     }
     public virtual void Move(Cell newCell)
     {
@@ -37,9 +41,12 @@ public class HiveMember : MonoBehaviour
         }
         hexaInfo.TryToRemoveCells();
         yield return null;
+        NewMemberPosition(target);
+    }
+    public virtual void NewMemberPosition(Vector3 target)
+    {
         myCell = hexaInfo.CreateNewCell(target);
         SOInstances.GameManager.selectedHiveMember = null;
-        yield return null;
         hexaInfo.duplicateCells.RestructCells();
     }
     public virtual void MarkCellsToMove()
