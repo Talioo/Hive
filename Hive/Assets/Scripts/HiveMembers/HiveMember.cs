@@ -9,24 +9,14 @@ public class HiveMember : MonoBehaviour
     public MoveType MoveType;
     public HexaCell myCell;
 
-    protected virtual void Start()
-    {
-        //hexaInfo.TryToRemoveCells();
-        hexaInfo.CleanCellsList();
-        hexaInfo.CheckEmpties();
-        if(myCell == null)
-            myCell = hexaInfo.CreateNewCell(transform.position);
-    }
+    protected float moveSpeed = 2;
     public void OnMouseDown()
     {
-        print(SOInstances.GameManager.selectedHiveMember);
         if (SOInstances.GameManager.selectedHiveMember != null)
-            return;
-        print("OnMouseDown");
-        //{
-        //    hexaInfo.TryToRemoveCells();
-        //    SOInstances.GameManager.selectedHiveMember = null;
-        //}
+        {
+            hexaInfo.TryToRemoveCells();
+            SOInstances.GameManager.selectedHiveMember = null;
+        }
         if (!myCell.CanIMove(this))
             return;
         MarkCellsToMove();
@@ -42,21 +32,16 @@ public class HiveMember : MonoBehaviour
         Vector3 target = newCell.transform.position;
         while (transform.position != target)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target, 2 * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
             yield return null;
         }
         hexaInfo.TryToRemoveCells();
         yield return null;
-        NewMemberPosition(target);
-    }
-    public virtual void NewMemberPosition(Vector3 target)
-    {
-        hexaInfo.CleanCellsList();
         myCell = hexaInfo.CreateNewCell(target);
         SOInstances.GameManager.selectedHiveMember = null;
-        hexaInfo.CheckEmpties();
+        yield return null;
+        hexaInfo.duplicateCells.RestructCells();
     }
-
     public virtual void MarkCellsToMove()
     {
 

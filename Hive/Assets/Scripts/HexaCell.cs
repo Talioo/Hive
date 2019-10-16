@@ -6,15 +6,16 @@ public class HexaCell : Cell
     #region Parametrs
     [SerializeField] private List<HexaCell> neighbours;
     [SerializeField] public List<EmptyCell> availableCells;
+    public List<HiveMember> hiveMembersOnMe { get; private set; }
     public bool isMarked = false;
     public bool IsFree { get { return hiveMembersOnMe.Count == 0; } }
     #endregion
     #region Unity methods
-    protected override void Start()
+    public override void Start()
     {
-        if (hexaInfo.hexaCellsOnScene.Count == 0)
-            availableCells.ForEach(x => x.gameObject.SetActive(false));
         base.Start();
+        hiveMembersOnMe = new List<HiveMember>();
+        hexaInfo.OnRemoveCells += RemoveCells;
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -27,7 +28,7 @@ public class HexaCell : Cell
         else
         {
             var neighbour = collision.gameObject.GetComponent<HexaCell>();
-            if(neighbour != null)
+            if (neighbour != null)
                 neighbours.Add(neighbour);
         }
     }
@@ -41,6 +42,7 @@ public class HexaCell : Cell
     {
         neighbours.ForEach(x => x.RemoveMe(this));
         availableCells.ForEach(x => x.RemoveMasterCell(this));
+        hexaInfo.OnRemoveCells -= RemoveCells;
         base.OnDestroy();
     }
     #endregion
@@ -62,15 +64,7 @@ public class HexaCell : Cell
         }
         availableCells.Add(emptyCell);
     }
-    public void RemoveEmptyCell()
-    {
-        availableCells.RemoveAll(x => x == null);
-    }
-    public void TryToRemoveCell()
-    {
-        if (hiveMembersOnMe.Count == 0)
-            Destroy(gameObject);
-    }
+    
     public void FindNeighbour()
     {
         isMarked = true;
@@ -86,11 +80,22 @@ public class HexaCell : Cell
     }
     public bool CanIMove(HiveMember member)
     {
-        //if (!hexaInfo.CanRemoveCell(this))
-        //    return false;
-        if (hiveMembersOnMe.Count == 0)
-            return true;
+        if (!hexaInfo.CanRemoveCell(this)) return false;
+        if (hiveMembersOnMe.Count == 0) return true;
         return hiveMembersOnMe[hiveMembersOnMe.Count - 1] == member;
+    }
+    #endregion
+    #region Private methods
+    private void RemoveCells()
+    {
+        availableCells.RemoveAll(x => x == null);
+        SetReadyToUseToEmpty(false);
+        TryToRemoveCell();
+    }
+    private void TryToRemoveCell()
+    {
+        if (hiveMembersOnMe.Count == 0)
+            Destroy(gameObject);
     }
     #endregion
 }

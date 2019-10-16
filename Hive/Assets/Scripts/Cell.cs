@@ -5,25 +5,18 @@ using UnityEngine;
 public class Cell : MonoBehaviour
 {
     public SOHexaInfo hexaInfo;
-    public List<HiveMember> hiveMembersOnMe { get; private set; }
-    [HideInInspector] public SpriteRenderer sprite;
     [HideInInspector] public bool readyToUse = false;
-
+    private SpriteRenderer sprite;
     private Color startColor;
-    private bool canSpawnOnMe = false;
-    protected virtual void Start()
+    private const float rayLenght = 100f;
+    public virtual void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
         startColor = sprite.color;
         hexaInfo.AddNewCell(this);
-        //hexaInfo.CheckEmpties();
-        SOInstances.UIController.OnNewMemberSpawning += TryToSpawnOnMe;
-        hiveMembersOnMe = new List<HiveMember>();
     }
     public void OnMouseDown()
     {
-        if (canSpawnOnMe)
-            SOInstances.UIController.Aprove(this);
         if (readyToUse)
             SOInstances.GameManager.selectedHiveMember.Move(this);
     }
@@ -33,37 +26,21 @@ public class Cell : MonoBehaviour
         if (readyToUse)
         {
             sprite.color = Color.blue;
-            sprite.sortingOrder += 1;
+            sprite.sortingOrder++;
         }
         else
         {
             sprite.color = startColor;
-            sprite.sortingOrder -= 1;
-        }
-    }
-    protected void TryToSpawnOnMe(bool value)
-    {
-        if (hiveMembersOnMe.Count > 0)
-            return;
-        if (value)
-        {
-            sprite.color = Color.green;
-            canSpawnOnMe = true;
-        }
-        else
-        {
-            sprite.color = startColor;
-            canSpawnOnMe = false;
+            sprite.sortingOrder--;
         }
     }
     public bool CheckIsEmpty()
     {
-        RaycastHit[] raycastHit = Physics.RaycastAll(transform.position + Vector3.down * 5, Vector3.up, 100f);
+        RaycastHit[] raycastHit = Physics.RaycastAll(transform.position + Vector3.down, Vector3.up, rayLenght);
         return raycastHit.Length == 0;
     }
     public virtual void OnDestroy()
     {
         hexaInfo.RemoveCell(this);
-        SOInstances.UIController.OnNewMemberSpawning -= TryToSpawnOnMe;
     }
 }
