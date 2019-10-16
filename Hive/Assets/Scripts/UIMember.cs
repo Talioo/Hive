@@ -22,6 +22,7 @@ public class UIMember : MonoBehaviour
     {
         var lastImage = images[images.Count - 1];
         lastImage.SetActive(false);
-        if (lastImage != gameObject) images.Remove(lastImage);
+        if (lastImage != gameObject)
+            images.Remove(lastImage);
     }
 }

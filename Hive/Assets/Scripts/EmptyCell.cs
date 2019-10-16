@@ -2,27 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmptyCell : MonoBehaviour
+public class EmptyCell : Cell
 {
-    [SerializeField] private HexaCell masterCell;
+    public List<HexaCell> masterCell;
+    private bool alreadyTaken = false;
 
-    private bool readyToUse = false;
-    private SpriteRenderer sprite;
-    private void Start()
+    public void AddNewMasterCell(EmptyCell cell)
     {
-        sprite = GetComponent<SpriteRenderer>();
+        cell.masterCell[0].AddEmptyCell(this);
+        if (masterCell.Find(x => x == cell) == null)
+            masterCell.Add(cell.masterCell[0]);
     }
-    private void OnMouseDown()
+    public void RemoveMasterCell(HexaCell cell)
     {
-        if (readyToUse) SOInstances.GameManager.selectedHiveMember.Move(this);
+        if (masterCell.Find(x => x == cell) != null)
+            masterCell.Remove(cell);
     }
-    public HexaCell CreateNewCell()
+    private void OnCollisionEnter(Collision collision)
     {
-        return Instantiate(masterCell.hexaInfo.hexaPrefab, transform.position, transform.rotation).GetComponent<HexaCell>();
+        if(collision.collider.GetComponent<EmptyCell>() == null)
+            alreadyTaken = true;
     }
-    public void ReadyToUse(bool _readyToUse)
+    private void OnCollisionExit(Collision collision)
     {
-        readyToUse = _readyToUse;
-        sprite.color = readyToUse ? Color.blue : Color.white;
+        if (collision.collider.GetComponent<EmptyCell>() == null)
+            alreadyTaken = false;
+    }
+    public override void ReadyToUse(bool value)
+    {
+        if (alreadyTaken && value)
+            return;
+        base.ReadyToUse(value);
     }
 }

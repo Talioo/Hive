@@ -1,55 +1,101 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class HexaCell : MonoBehaviour
+public class HexaCell : Cell
 {
-    public SOHexaInfo hexaInfo;
-    public List<HexaCell> neighbours;
-    public List<EmptyCell> availableCells;
+    #region Parametrs
+    [SerializeField] private List<HexaCell> neighbours;
+    [SerializeField] public List<EmptyCell> availableCells;
+    public List<HiveMember> hiveMembersOnMe { get; private set; }
     public bool isMarked = false;
-    public bool IsFree { get { return CheckIsEmpty(); } }
-    private void Start()
+    public bool IsFree { get { return hiveMembersOnMe.Count == 0; } }
+    #endregion
+    #region Unity methods
+    public override void Start()
     {
-        hexaInfo.AddNewCell(this);
+        base.Start();
+        hiveMembersOnMe = new List<HiveMember>();
+        hexaInfo.OnRemoveCells += RemoveCells;
     }
-    private void OnMouseDown()
+    private void OnCollisionEnter(Collision collision)
     {
-        hexaInfo.NeedToRemove(this);
+        var memberOnMe = collision.collider.GetComponent<HiveMember>();
+        if (memberOnMe != null)
+        {
+            memberOnMe.myCell = this;
+            hiveMembersOnMe.Add(memberOnMe);
+        }
+        else
+        {
+            var neighbour = collision.gameObject.GetComponent<HexaCell>();
+            if (neighbour != null)
+                neighbours.Add(neighbour);
+        }
     }
-    public void ReadyToUse(bool _readyToUse)
+    private void OnCollisionExit(Collision collision)
     {
-        RemoveCell();
-        availableCells.ForEach(x => x.ReadyToUse(_readyToUse));
+        var memberOnMe = collision.collider.GetComponent<HiveMember>();
+        if (memberOnMe != null)
+            hiveMembersOnMe.Remove(memberOnMe);
     }
-    public void RemoveCell()
+    public override void OnDestroy()
     {
-        if (CheckIsEmpty()) Destroy(gameObject);
+        neighbours.ForEach(x => x.RemoveMe(this));
+        availableCells.ForEach(x => x.RemoveMasterCell(this));
+        hexaInfo.OnRemoveCells -= RemoveCells;
+        base.OnDestroy();
     }
-    bool CheckIsEmpty()
+    #endregion
+    #region Public methods
+    public void SetReadyToUseToEmpty(bool value, bool isBeetle = false)
     {
-        RaycastHit[] raycastHit = Physics.RaycastAll(transform.position, Vector3.up, 10f);
-        return raycastHit.Length == 0;
+        if (!value || isBeetle)
+        {
+            neighbours.ForEach(x => x.ReadyToUse(value));
+        }
+        availableCells.ForEach(x => x.ReadyToUse(value));
     }
-    [ContextMenu("FindNeighbour")]
+    public void AddEmptyCell(EmptyCell emptyCell)
+    {
+        foreach (var item in availableCells)
+        {
+            if (item == emptyCell)
+                return;
+        }
+        availableCells.Add(emptyCell);
+    }
+    
     public void FindNeighbour()
     {
         isMarked = true;
         foreach (var item in neighbours)
         {
-            if (!item.isMarked) item.FindNeighbour();
+            if (!item.isMarked)
+                item.FindNeighbour();
         }
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        neighbours.Add(collision.gameObject.GetComponent<HexaCell>());
     }
     public void RemoveMe(HexaCell collision)
     {
         neighbours.Remove(collision);
     }
-    private void OnDestroy()
+    public bool CanIMove(HiveMember member)
     {
-        neighbours.ForEach(x => x.RemoveMe(this));
-        hexaInfo.RemoveCell(this);
+        if (!hexaInfo.CanRemoveCell(this)) return false;
+        if (hiveMembersOnMe.Count == 0) return true;
+        return hiveMembersOnMe[hiveMembersOnMe.Count - 1] == member;
     }
+    #endregion
+    #region Private methods
+    private void RemoveCells()
+    {
+        availableCells.RemoveAll(x => x == null);
+        SetReadyToUseToEmpty(false);
+        TryToRemoveCell();
+    }
+    private void TryToRemoveCell()
+    {
+        if (hiveMembersOnMe.Count == 0)
+            Destroy(gameObject);
+    }
+    #endregion
 }

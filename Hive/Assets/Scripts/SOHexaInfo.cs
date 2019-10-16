@@ -5,20 +5,24 @@ using UnityEngine;
 public class SOHexaInfo : ScriptableObject
 {
     public GameObject hexaPrefab;
+    public SODuplicateCells duplicateCells;
 
-    [SerializeField] private List<HexaCell> cellsOnScene;
+    [SerializeField] private List<HexaCell> hexaCellsOnScene;
+    public delegate void RemoveCells();
+    public event RemoveCells OnRemoveCells;
     private void OnEnable()
     {
-        cellsOnScene = new List<HexaCell>();
+        hexaCellsOnScene = new List<HexaCell>();
     }
-    public void NeedToRemove(HexaCell cellToRemove)
+    public bool CanRemoveCell(HexaCell cellToRemove)
     {
         cellToRemove.isMarked = true;
-        var startPoint = cellsOnScene.Find(x => !x.isMarked);
-        if (startPoint == null) return;
+        var startPoint = hexaCellsOnScene.Find(x => !x.isMarked);
+        if (startPoint == null)
+            return false;
         startPoint.FindNeighbour();
         bool canRemove = true;
-        foreach (var item in cellsOnScene)
+        foreach (var item in hexaCellsOnScene)
         {
             if (!item.isMarked)
             {
@@ -26,23 +30,31 @@ public class SOHexaInfo : ScriptableObject
                 break;
             }
         }
-        cellsOnScene.ForEach(x => x.isMarked = false);
-        if (canRemove) cellToRemove.RemoveCell();
+        hexaCellsOnScene.ForEach(x => x.isMarked = false);
+        return canRemove;
     }
-    public void AddNewCell(HexaCell cell)
+    public void AddNewCell(Cell cell)
     {
-        cellsOnScene.Add(cell);
+        if(cell is HexaCell)
+            hexaCellsOnScene.Add(cell as HexaCell);
+        if (cell is EmptyCell)
+            duplicateCells.AddNewCell(cell as EmptyCell);
     }
-    public void RemoveCell(HexaCell cell)
+    public void RemoveCell(Cell cell)
     {
-        cellsOnScene.Remove(cell);
+        if (cell is HexaCell)
+            hexaCellsOnScene.Remove(cell as HexaCell);
     }
     public List<HexaCell> GetFreeCells()
     {
-        return cellsOnScene.FindAll(x => x.IsFree);
+        return hexaCellsOnScene.FindAll(x => x.IsFree);
     }
-    public void UncheckCells()
+    public void TryToRemoveCells()
     {
-        cellsOnScene.ForEach(x => x.ReadyToUse(false));
+        OnRemoveCells.Invoke();
+    }
+    public HexaCell CreateNewCell(Vector3 position)
+    {
+        return Instantiate(hexaPrefab, position, hexaPrefab.transform.rotation).GetComponent<HexaCell>();
     }
 }

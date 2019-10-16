@@ -14,7 +14,8 @@ public class UIController : MonoBehaviour
     }
     public void SpawnHiveMember(UIMember member)
     {
-        if (waitingForAprove != null) return;
+        if (waitingForAprove != null)
+            return;
         spawningMember = member;
         SOInstances.Shining.Show(member.transform.position);
         waitingForAprove = WaitingForAprove();
@@ -22,7 +23,8 @@ public class UIController : MonoBehaviour
     }
     public void Aprove()
     {
-        if (waitingForAprove == null) return;
+        if (waitingForAprove == null)
+            return;
         StopCoroutine(waitingForAprove);
         waitingForAprove = null;
         spawningMember.AproveSpawning();
