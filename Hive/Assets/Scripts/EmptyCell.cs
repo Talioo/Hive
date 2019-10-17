@@ -30,8 +30,8 @@ public class EmptyCell : Cell
     }
     public override void ReadyToUse(bool value)
     {
-        if (alreadyTaken && value)
-            return;
+        //if (alreadyTaken && value)
+        //    return;
         base.ReadyToUse(value);
     }
 }

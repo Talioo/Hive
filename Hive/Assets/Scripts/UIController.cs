@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     private UIMember spawningMember;
-    IEnumerator waitingForAprove;
+    private IEnumerator waitingForAprove;
+    private bool firstSpawn = true;
 
     public delegate void NewMemberSpawn(bool value);
     public event NewMemberSpawn OnNewMemberSpawning;
@@ -18,7 +19,8 @@ public class UIController : MonoBehaviour
     }
     public void SpawnHiveMember(UIMember member)
     {
-        if (waitingForAprove != null) return;
+        if (waitingForAprove != null)
+            return;
         OnNewMemberSpawning.Invoke(true);
         spawningMember = member;
         SOInstances.Shining.Show(member.transform.position);
@@ -27,7 +29,8 @@ public class UIController : MonoBehaviour
     }
     public void Aprove(Cell cell)
     {
-        if (waitingForAprove == null) return;
+        if (waitingForAprove == null)
+            return;
         StopCoroutine(waitingForAprove);
         Instantiate(spawningMember.spavningPrefab, cell.transform.position, cell.transform.rotation);
         spawningMember.AproveSpawning();
