@@ -33,15 +33,9 @@ public class Cell : MonoBehaviour
     {
         readyToUse = value;
         if (readyToUse)
-        {
             sprite.color = Color.blue;
-            sprite.sortingOrder++;
-        }
         else
-        {
             sprite.color = startColor;
-            sprite.sortingOrder--;
-        }
     }
     protected void TryToSpawnOnMe(bool value)
     {

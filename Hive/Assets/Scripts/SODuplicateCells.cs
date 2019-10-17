@@ -24,6 +24,7 @@ public class SODuplicateCells : ScriptableObject
     }
     public void RestructCells()
     {
-        OnRestruct.Invoke();
+        if (OnRestruct != null)
+            OnRestruct.Invoke();
     }
 }

@@ -22,14 +22,12 @@ public class HexaCell : Cell
         {
             memberOnMe.myCell = this;
             hiveMembersOnMe.Add(memberOnMe);
-            print($"OnCollisionEnter: myName: {name}, exitObject: {collision.gameObject.name}, membersOnMe: {hiveMembersOnMe.Count}");
         }
         else
         {
             var neighbour = collision.gameObject.GetComponent<HexaCell>();
             if (neighbour != null)
                 neighbours.Add(neighbour);
-            print($"OnCollisionEnter: myName: {name}, exitObject: {collision.gameObject.name}, neighbours: {neighbours.Count}");
         }
     }
     private void OnCollisionExit(Collision collision)
@@ -37,7 +35,7 @@ public class HexaCell : Cell
         var memberOnMe = collision.collider.GetComponent<HiveMember>();
         if (memberOnMe != null)
             hiveMembersOnMe.Remove(memberOnMe);
-        print($"OnCollisionExit: myName: {name}, exitObject: {collision.gameObject.name}, membersOnMe: {hiveMembersOnMe.Count}");
+        RemoveCells();
     }
     public override void OnDestroy()
     {
@@ -54,6 +52,7 @@ public class HexaCell : Cell
         {
             neighbours.ForEach(x => x.ReadyToUse(value));
         }
+        availableCells.RemoveAll(x => x == null);
         availableCells.ForEach(x => x.ReadyToUse(value));
     }
     public void AddEmptyCell(EmptyCell emptyCell)

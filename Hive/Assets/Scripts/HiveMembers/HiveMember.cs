@@ -9,7 +9,7 @@ public class HiveMember : MonoBehaviour
     public MoveType MoveType;
     public HexaCell myCell;
 
-    protected float moveSpeed = 2;
+    protected float moveSpeed = 1;
     protected virtual void Start()
     {
         if (myCell == null)
@@ -20,9 +20,29 @@ public class HiveMember : MonoBehaviour
     {
         hexaInfo.duplicateCells.RestructCells();
         if (SOInstances.GameManager.selectedHiveMember != null)
-            return;
-        if (!myCell.CanIMove(this))
-            return;
+        {
+            if (SOInstances.GameManager.selectedHiveMember is Beetle && SOInstances.GameManager.selectedHiveMember != this)
+            {
+                if (myCell.readyToUse)
+                    SOInstances.GameManager.selectedHiveMember.Move(myCell);
+                else
+                    Unselect();
+            }
+            else
+                Unselect();
+        }
+        else 
+        if (myCell.CanIMove(this))
+            Select();
+        
+    }
+    private void Unselect()
+    {
+        SOInstances.GameManager.selectedHiveMember = null;
+        hexaInfo.TryToRemoveCells();
+    }
+    private void Select()
+    {
         SOInstances.GameManager.selectedHiveMember = this;
         MarkCellsToMove();
     }
