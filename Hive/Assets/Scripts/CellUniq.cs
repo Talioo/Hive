@@ -9,7 +9,7 @@ public class CellUniq : MonoBehaviour
     private Vector3 uniqPos;
     private SODuplicateCells duplicateCellsSO;
 
-    private const float distance = 0.2f;
+    private const float distance = 0.02f;
 
     public CellUniq(EmptyCell emptyCell, SODuplicateCells duplicateCells)
     {

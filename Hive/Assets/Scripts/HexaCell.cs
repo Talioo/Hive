@@ -6,7 +6,6 @@ public class HexaCell : Cell
     #region Parametrs
     [SerializeField] private List<HexaCell> neighbours;
     [SerializeField] public List<EmptyCell> availableCells;
-    public List<HiveMember> hiveMembersOnMe { get; private set; }
     public bool isMarked = false;
     public bool IsFree { get { return hiveMembersOnMe.Count == 0; } }
     #endregion
@@ -14,7 +13,6 @@ public class HexaCell : Cell
     public override void Start()
     {
         base.Start();
-        hiveMembersOnMe = new List<HiveMember>();
         hexaInfo.OnRemoveCells += RemoveCells;
     }
     private void OnCollisionEnter(Collision collision)
@@ -24,12 +22,14 @@ public class HexaCell : Cell
         {
             memberOnMe.myCell = this;
             hiveMembersOnMe.Add(memberOnMe);
+            print($"OnCollisionEnter: myName: {name}, exitObject: {collision.gameObject.name}, membersOnMe: {hiveMembersOnMe.Count}");
         }
         else
         {
             var neighbour = collision.gameObject.GetComponent<HexaCell>();
             if (neighbour != null)
                 neighbours.Add(neighbour);
+            print($"OnCollisionEnter: myName: {name}, exitObject: {collision.gameObject.name}, neighbours: {neighbours.Count}");
         }
     }
     private void OnCollisionExit(Collision collision)
@@ -37,6 +37,7 @@ public class HexaCell : Cell
         var memberOnMe = collision.collider.GetComponent<HiveMember>();
         if (memberOnMe != null)
             hiveMembersOnMe.Remove(memberOnMe);
+        print($"OnCollisionExit: myName: {name}, exitObject: {collision.gameObject.name}, membersOnMe: {hiveMembersOnMe.Count}");
     }
     public override void OnDestroy()
     {
@@ -80,8 +81,11 @@ public class HexaCell : Cell
     }
     public bool CanIMove(HiveMember member)
     {
-        if (!hexaInfo.CanRemoveCell(this)) return false;
-        if (hiveMembersOnMe.Count == 0) return true;
+        //@TODO: Add better algoritm to find if cell cen be removed
+        //if (!hexaInfo.CanRemoveCell(this))
+        //    return false;
+        if (hiveMembersOnMe.Count == 0)
+            return true;
         return hiveMembersOnMe[hiveMembersOnMe.Count - 1] == member;
     }
     #endregion

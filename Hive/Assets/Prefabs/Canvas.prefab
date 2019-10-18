@@ -290,10 +290,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c943127a9c615f4b896e99ef357af6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiController: {fileID: 8157186832673017121}
   images:
   - {fileID: 8157186832383106059}
   button: {fileID: 8157186832383106062}
+  spavningPrefab: {fileID: 8788829668851584692, guid: aaaa0f0826e2d5d488268bba5995d3ea,
+    type: 3}
 --- !u!1 &8157186832444840778
 GameObject:
   m_ObjectHideFlags: 0
@@ -1644,12 +1645,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c943127a9c615f4b896e99ef357af6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiController: {fileID: 8157186832673017121}
   images:
   - {fileID: 8157186833869529872}
   - {fileID: 8157186833368032404}
   - {fileID: 8157186833419148525}
   button: {fileID: 8157186833869529874}
+  spavningPrefab: {fileID: 0}
 --- !u!1 &8157186833671469688
 GameObject:
   m_ObjectHideFlags: 0
@@ -2273,12 +2274,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c943127a9c615f4b896e99ef357af6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiController: {fileID: 8157186832673017121}
   images:
   - {fileID: 8157186833170688071}
   - {fileID: 8157186832882931598}
   - {fileID: 8157186833839506979}
   button: {fileID: 8157186833170688073}
+  spavningPrefab: {fileID: 0}
 --- !u!1 &8157186834076860178
 GameObject:
   m_ObjectHideFlags: 0
@@ -2329,11 +2330,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c943127a9c615f4b896e99ef357af6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiController: {fileID: 8157186832673017121}
   images:
   - {fileID: 8157186833212818493}
   - {fileID: 8157186832886233836}
   button: {fileID: 8157186833212818495}
+  spavningPrefab: {fileID: 318579793623829220, guid: bd6395050d910db4893c01d0ae4f8256,
+    type: 3}
 --- !u!1 &8157186834099429363
 GameObject:
   m_ObjectHideFlags: 0
@@ -2384,8 +2386,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c943127a9c615f4b896e99ef357af6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiController: {fileID: 8157186832673017121}
   images:
   - {fileID: 8157186833671469688}
   - {fileID: 8157186833256397712}
   button: {fileID: 8157186833671469690}
+  spavningPrefab: {fileID: 0}

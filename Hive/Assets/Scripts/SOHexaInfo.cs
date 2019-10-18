@@ -7,7 +7,7 @@ public class SOHexaInfo : ScriptableObject
     public GameObject hexaPrefab;
     public SODuplicateCells duplicateCells;
 
-    [SerializeField] private List<HexaCell> hexaCellsOnScene;
+    public List<HexaCell> hexaCellsOnScene { get; private set; }
     public delegate void RemoveCells();
     public event RemoveCells OnRemoveCells;
     private void OnEnable()
