@@ -3,7 +3,9 @@ guid: d333d754a2324fd4eaedaf7f9bdba9e5
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
+  - myCell: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

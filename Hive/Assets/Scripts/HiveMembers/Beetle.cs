@@ -11,10 +11,6 @@ public class Beetle : HiveMember
         base.Start();
         startPos = transform.position;
     }
-    public override void MarkCellsToMove()
-    {
-        myCell.SetReadyToUseToEmpty(true, true);
-    }
     public override IEnumerator CrawlToTarget(Cell newCell)
     {
         Vector3 target = newCell.transform.position;

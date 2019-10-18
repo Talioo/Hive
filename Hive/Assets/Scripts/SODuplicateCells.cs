@@ -22,6 +22,10 @@ public class SODuplicateCells : ScriptableObject
         }
         uniqCells.Add(new CellUniq(cell, this));
     }
+    public EmptyCell GetUniqCell(EmptyCell cell)
+    {
+        return uniqCells.Find(x => Vector3.Distance(x.uniqPos, cell.transform.position) < 0.02f).uniqueCell;
+    }
     public void RestructCells()
     {
         if (OnRestruct != null)

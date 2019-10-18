@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CellUniq : MonoBehaviour
 {
-    private EmptyCell uniqueCell;
+    public EmptyCell uniqueCell { get; private set; }
+    public Vector3 uniqPos { get; private set; }
     private List<EmptyCell> duplicatedCellsList;
-    private Vector3 uniqPos;
     private SODuplicateCells duplicateCellsSO;
 
     private const float distance = 0.02f;

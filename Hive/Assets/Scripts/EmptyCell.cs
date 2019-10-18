@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class EmptyCell : Cell
 {
+    public int cellNum;
     public List<HexaCell> masterCell;
-    private bool alreadyTaken = false;
 
+    public override void Start()
+    {
+        base.Start();
+    }
     public void AddNewMasterCell(EmptyCell cell)
     {
         cell.masterCell[0].AddEmptyCell(this);
@@ -18,20 +22,33 @@ public class EmptyCell : Cell
         if (masterCell.Find(x => x == cell) != null)
             masterCell.Remove(cell);
     }
-    private void OnCollisionEnter(Collision collision)
+    public bool IsHexaCellNowOnMe()
     {
-        if(collision.collider.GetComponent<EmptyCell>() == null)
-            alreadyTaken = true;
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.collider.GetComponent<EmptyCell>() == null)
-            alreadyTaken = false;
+        for (int i = 0; i < hexaInfo.hexaCellsOnScene.Count; i++)
+        {
+            if (Vector3.Distance(hexaInfo.hexaCellsOnScene[i].transform.position, transform.position) < 0.15f)
+                return true;
+        }
+        return false;
     }
     public override void ReadyToUse(bool value)
     {
         //if (alreadyTaken && value)
         //    return;
-        base.ReadyToUse(value);
+        if (value)
+        {
+            var uniq = hexaInfo.duplicateCells.GetUniqCell(this);
+            if (uniq == this)
+                base.ReadyToUse(value);
+            else
+                uniq.ReadyToUse(value);
+        }
+        else
+            base.ReadyToUse(value);
+
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position + Vector3.down * 0.01f, transform.position + Vector3.up * 0.01f);
     }
 }

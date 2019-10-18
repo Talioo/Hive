@@ -2279,7 +2279,8 @@ MonoBehaviour:
   - {fileID: 8157186832882931598}
   - {fileID: 8157186833839506979}
   button: {fileID: 8157186833170688073}
-  spavningPrefab: {fileID: 0}
+  spavningPrefab: {fileID: 3885555741362643687, guid: e0008e5396c47d34eb125a7c8e0b69a8,
+    type: 3}
 --- !u!1 &8157186834076860178
 GameObject:
   m_ObjectHideFlags: 0
