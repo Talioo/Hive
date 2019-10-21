@@ -4,16 +4,16 @@ using UnityEngine;
 public class HexaCell : Cell
 {
     #region Parametrs
-    [SerializeField] private List<HexaCell> neighbours;
-    [SerializeField] public List<EmptyCell> availableCells;
+    public List<EmptyCell> availableCells;
     public bool isMarked = false;
     public bool IsFree { get { return hiveMembersOnMe.Count == 0; } }
+    public List<HexaCell> neighbours;
     #endregion
     #region Unity methods
     public override void Start()
     {
         base.Start();
-        hexaInfo.OnRemoveCells += RemoveCells;
+        neighbours = new List<HexaCell>();
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -22,14 +22,12 @@ public class HexaCell : Cell
         {
             memberOnMe.myCell = this;
             hiveMembersOnMe.Add(memberOnMe);
-            print($"OnCollisionEnter: myName: {name}, exitObject: {collision.gameObject.name}, membersOnMe: {hiveMembersOnMe.Count}");
         }
         else
         {
             var neighbour = collision.gameObject.GetComponent<HexaCell>();
             if (neighbour != null)
                 neighbours.Add(neighbour);
-            print($"OnCollisionEnter: myName: {name}, exitObject: {collision.gameObject.name}, neighbours: {neighbours.Count}");
         }
     }
     private void OnCollisionExit(Collision collision)
@@ -37,24 +35,21 @@ public class HexaCell : Cell
         var memberOnMe = collision.collider.GetComponent<HiveMember>();
         if (memberOnMe != null)
             hiveMembersOnMe.Remove(memberOnMe);
-        print($"OnCollisionExit: myName: {name}, exitObject: {collision.gameObject.name}, membersOnMe: {hiveMembersOnMe.Count}");
+        RemoveCells();
     }
     public override void OnDestroy()
     {
         neighbours.ForEach(x => x.RemoveMe(this));
         availableCells.ForEach(x => x.RemoveMasterCell(this));
-        hexaInfo.OnRemoveCells -= RemoveCells;
         base.OnDestroy();
     }
     #endregion
     #region Public methods
-    public void SetReadyToUseToEmpty(bool value, bool isBeetle = false)
+    public void SetReadyToUseToEmpty(MemberType member)
     {
-        if (!value || isBeetle)
-        {
-            neighbours.ForEach(x => x.ReadyToUse(value));
-        }
-        availableCells.ForEach(x => x.ReadyToUse(value));
+        availableCells.RemoveAll(x => x == null);
+        neighbours.RemoveAll(x => x == null);
+        MarkCells.MarkEmptyCells(this, member);
     }
     public void AddEmptyCell(EmptyCell emptyCell)
     {
@@ -90,10 +85,10 @@ public class HexaCell : Cell
     }
     #endregion
     #region Private methods
-    private void RemoveCells()
+    protected override void RemoveCells()
     {
+        base.RemoveCells();
         availableCells.RemoveAll(x => x == null);
-        SetReadyToUseToEmpty(false);
         TryToRemoveCell();
     }
     private void TryToRemoveCell()

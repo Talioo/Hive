@@ -2,9 +2,9 @@
 {
     QueenBee,
     Spider,
-    Beetles,
-    Grasshoppers,
-    SoldierAnts
+    Beetle,
+    Grasshopper,
+    SoldierAnt
 }
 public enum MoveType
 {

@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: c3c40c6075a073d49a987d704e989a17
+guid: fe39671cee1cfd847b71aaba4704644c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
-  - myCell: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

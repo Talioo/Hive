@@ -5,11 +5,10 @@ using UnityEngine;
 public class Cell : MonoBehaviour
 {
     public SOHexaInfo hexaInfo;
-    public List<HiveMember> hiveMembersOnMe { get; private set; }
     [HideInInspector] public bool readyToUse = false;
-    private SpriteRenderer sprite;
+    public List<HiveMember> hiveMembersOnMe { get; private set; }
+    public SpriteRenderer sprite { get; private set; }
     private Color startColor;
-    private const float rayLenght = 100f;
     private bool canSpawnOnMe = false;
     public virtual void Start()
     {
@@ -18,6 +17,7 @@ public class Cell : MonoBehaviour
         hexaInfo.AddNewCell(this);
         SOInstances.UIController.OnNewMemberSpawning += TryToSpawnOnMe;
         hiveMembersOnMe = new List<HiveMember>();
+        hexaInfo.OnRemoveCells += RemoveCells;
     }
     public void OnMouseDown()
     {
@@ -33,15 +33,13 @@ public class Cell : MonoBehaviour
     {
         readyToUse = value;
         if (readyToUse)
-        {
             sprite.color = Color.blue;
-            sprite.sortingOrder++;
-        }
         else
-        {
             sprite.color = startColor;
-            sprite.sortingOrder--;
-        }
+    }
+    protected virtual void RemoveCells()
+    {
+        ReadyToUse(false);
     }
     protected void TryToSpawnOnMe(bool value)
     {
@@ -60,7 +58,7 @@ public class Cell : MonoBehaviour
     }
     public bool CheckIsEmpty()
     {
-        RaycastHit[] raycastHit = Physics.RaycastAll(transform.position + Vector3.down, Vector3.up, rayLenght);
+        RaycastHit[] raycastHit = Physics.RaycastAll(transform.position + Vector3.down, Vector3.up, Constants.RayLenght);
         return raycastHit.Length == 0;
     }
     public virtual void OnDestroy()
@@ -68,5 +66,6 @@ public class Cell : MonoBehaviour
         hexaInfo.RemoveCell(this);
         hexaInfo.duplicateCells.RestructCells();
         SOInstances.UIController.OnNewMemberSpawning -= TryToSpawnOnMe;
+        hexaInfo.OnRemoveCells -= RemoveCells;
     }
 }

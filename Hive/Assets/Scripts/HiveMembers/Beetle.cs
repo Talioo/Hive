@@ -5,21 +5,16 @@ using UnityEngine;
 public class Beetle : HiveMember
 {
     private Vector3 startPos;
-    private const float heigh = 0.02f;
     protected override void Start()
     {
         base.Start();
         startPos = transform.position;
     }
-    public override void MarkCellsToMove()
-    {
-        myCell.SetReadyToUseToEmpty(true, true);
-    }
     public override IEnumerator CrawlToTarget(Cell newCell)
     {
         Vector3 target = newCell.transform.position;
         if (newCell is HexaCell)
-            target.y = startPos.y + ((newCell as HexaCell).hiveMembersOnMe.Count * heigh);
+            target.y = startPos.y + ((newCell as HexaCell).hiveMembersOnMe.Count * Constants.FigureHeight);
         else
             target.y = startPos.y;
         while (transform.position != target)

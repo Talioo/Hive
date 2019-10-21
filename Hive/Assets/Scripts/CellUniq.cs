@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class CellUniq : MonoBehaviour
 {
-    private EmptyCell uniqueCell;
+    public EmptyCell uniqueCell { get; private set; }
+    public Vector3 uniqPos { get; private set; }
     private List<EmptyCell> duplicatedCellsList;
-    private Vector3 uniqPos;
     private SODuplicateCells duplicateCellsSO;
-
-    private const float distance = 0.02f;
 
     public CellUniq(EmptyCell emptyCell, SODuplicateCells duplicateCells)
     {
@@ -21,7 +19,7 @@ public class CellUniq : MonoBehaviour
     }
     public bool IsOnMyPosition(EmptyCell emptyCell)
     {
-        var value = Vector3.Distance(uniqPos, emptyCell.transform.position) < distance;
+        var value = Vector3.Distance(uniqPos, emptyCell.transform.position) < Constants.DistanceToCheckMyPos;
         if (value)
         {
             if (uniqueCell == null)

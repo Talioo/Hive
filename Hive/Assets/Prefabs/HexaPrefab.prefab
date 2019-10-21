@@ -32,7 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3809139467244367463}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!212 &3809139465530858713
 SpriteRenderer:
@@ -96,8 +96,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
   readyToUse: 0
+  cellNum: 5
   masterCell:
   - {fileID: 3809139467244367457}
+  hexaCellNowOnMe: {fileID: 0}
 --- !u!54 &1995222166
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -125,7 +127,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.11, y: 1.45, z: 0.20000005}
+  m_Size: {x: 1.2, y: 1.3, z: 0.20000005}
   m_Center: {x: 0, y: -0.00000023841858, z: 0}
 --- !u!1 &3809139466234780267
 GameObject:
@@ -223,8 +225,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
   readyToUse: 0
+  cellNum: 4
   masterCell:
   - {fileID: 3809139467244367457}
+  hexaCellNowOnMe: {fileID: 0}
 --- !u!54 &720184430
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -252,7 +256,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.11, y: 1.45, z: 0.20000005}
+  m_Size: {x: 1.2, y: 1.3, z: 0.20000005}
   m_Center: {x: 0, y: 0.00000023841858, z: 0}
 --- !u!1 &3809139466685519359
 GameObject:
@@ -350,8 +354,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
   readyToUse: 0
+  cellNum: 3
   masterCell:
   - {fileID: 3809139467244367457}
+  hexaCellNowOnMe: {fileID: 0}
 --- !u!54 &1151353796
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -379,7 +385,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.11, y: 1.45, z: 0.20000005}
+  m_Size: {x: 1.2, y: 1.3, z: 0.20000005}
   m_Center: {x: 0, y: 0.00000047683716, z: 0}
 --- !u!1 &3809139467006538054
 GameObject:
@@ -477,8 +483,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
   readyToUse: 0
+  cellNum: 1
   masterCell:
   - {fileID: 3809139467244367457}
+  hexaCellNowOnMe: {fileID: 0}
 --- !u!54 &765715331
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -506,7 +514,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.11, y: 1.45, z: 0.20000005}
+  m_Size: {x: 1.2, y: 1.3, z: 0.20000005}
   m_Center: {x: 0, y: -0.00000023841858, z: -0.00000011920929}
 --- !u!1 &3809139467043249421
 GameObject:
@@ -604,8 +612,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
   readyToUse: 0
+  cellNum: 0
   masterCell:
   - {fileID: 3809139467244367457}
+  hexaCellNowOnMe: {fileID: 0}
 --- !u!54 &61153293
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -633,7 +643,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.11, y: 1.45, z: 0.20000005}
+  m_Size: {x: 1.2, y: 1.3, z: 0.20000005}
   m_Center: {x: 0, y: -0.00000047683716, z: -0.00000011920929}
 --- !u!1 &3809139467150465341
 GameObject:
@@ -667,7 +677,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3809139467244367463}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!212 &3809139467150465337
 SpriteRenderer:
@@ -731,8 +741,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
   readyToUse: 0
+  cellNum: 2
   masterCell:
   - {fileID: 3809139467244367457}
+  hexaCellNowOnMe: {fileID: 0}
 --- !u!54 &863584914
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -760,7 +772,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.11, y: 1.45, z: 0.20000005}
+  m_Size: {x: 1.2, y: 1.3, z: 0.20000005}
   m_Center: {x: 0, y: 0.00000023841858, z: 0}
 --- !u!1 &3809139467244367461
 GameObject:
@@ -795,10 +807,10 @@ Transform:
   m_Children:
   - {fileID: 3809139467043249423}
   - {fileID: 3809139467006538055}
-  - {fileID: 3809139465530858718}
+  - {fileID: 3809139467150465342}
   - {fileID: 3809139466685519352}
   - {fileID: 3809139466234780260}
-  - {fileID: 3809139467150465342}
+  - {fileID: 3809139465530858718}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -864,7 +876,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
   readyToUse: 0
-  neighbours: []
   availableCells:
   - {fileID: 1837416735526052170}
   - {fileID: 833813086059810906}
@@ -873,6 +884,7 @@ MonoBehaviour:
   - {fileID: 4871543457064225915}
   - {fileID: 2506390698407042103}
   isMarked: 0
+  neighbours: []
 --- !u!54 &8494371824296164337
 Rigidbody:
   m_ObjectHideFlags: 0

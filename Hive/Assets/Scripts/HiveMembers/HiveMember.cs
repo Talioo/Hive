@@ -9,7 +9,7 @@ public class HiveMember : MonoBehaviour
     public MoveType MoveType;
     public HexaCell myCell;
 
-    protected float moveSpeed = 2;
+    protected float moveSpeed = 0.5f;
     protected virtual void Start()
     {
         if (myCell == null)
@@ -19,8 +19,43 @@ public class HiveMember : MonoBehaviour
     public void OnMouseDown()
     {
         hexaInfo.duplicateCells.RestructCells();
-        if (SOInstances.GameManager.selectedHiveMember != null)
-            return;
+        ChoseSelected(SOInstances.GameManager.selectedHiveMember);
+    }
+    void ChoseSelected(HiveMember selectedMember)
+    {
+        if (selectedMember != null)
+        {
+            if (selectedMember == this)
+            {
+                Unselect();
+                return;
+            }
+            if (selectedMember is Beetle)
+            {
+                if (myCell.readyToUse)
+                    selectedMember.Move(myCell);
+                else
+                {
+                    Unselect();
+                    Select();
+                }
+            }
+            else
+            {
+                Unselect();
+                Select();
+            }
+        }
+        else
+            Select();
+    }
+    protected virtual void Unselect()
+    {
+        SOInstances.GameManager.selectedHiveMember = null;
+        hexaInfo.TryToRemoveCells();
+    }
+    private void Select()
+    {
         if (!myCell.CanIMove(this))
             return;
         SOInstances.GameManager.selectedHiveMember = this;
@@ -30,6 +65,8 @@ public class HiveMember : MonoBehaviour
     {
         if (MoveType == MoveType.Crawl)
             StartCoroutine(CrawlToTarget(newCell));
+        if (MoveType == MoveType.Jump)
+            StartCoroutine(JumpToTarget(newCell));
     }
     public virtual IEnumerator CrawlToTarget(Cell newCell)
     {
@@ -43,6 +80,10 @@ public class HiveMember : MonoBehaviour
         yield return null;
         NewMemberPosition(target);
     }
+    public virtual IEnumerator JumpToTarget(Cell newCell)
+    {
+        yield return null;
+    }
     public virtual void NewMemberPosition(Vector3 target)
     {
         myCell = hexaInfo.CreateNewCell(target);
@@ -51,6 +92,6 @@ public class HiveMember : MonoBehaviour
     }
     public virtual void MarkCellsToMove()
     {
-
+        myCell.SetReadyToUseToEmpty(MemberType);
     }
 }
