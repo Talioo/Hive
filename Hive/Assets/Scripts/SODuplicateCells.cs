@@ -24,7 +24,7 @@ public class SODuplicateCells : ScriptableObject
     }
     public EmptyCell GetUniqCell(EmptyCell cell)
     {
-        return uniqCells.Find(x => Vector3.Distance(x.uniqPos, cell.transform.position) < 0.02f).uniqueCell;
+        return uniqCells.Find(x => Vector3.Distance(x.uniqPos, cell.transform.position) < Constants.DistanceToCheckMyPos).uniqueCell;
     }
     public void RestructCells()
     {

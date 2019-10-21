@@ -5,7 +5,6 @@ using UnityEngine;
 public class Grasshopper : HiveMember
 {
     private Vector3 startPos;
-    private const float heigh = 0.1f;
     public List<EmptyCell> possibleCells;
     protected override void Start()
     {
@@ -21,7 +20,7 @@ public class Grasshopper : HiveMember
     {
         Vector3 target = newCell.transform.position;
         float distance = Vector3.Distance(transform.position, target);
-        float maxY = startPos.y + heigh;
+        float maxY = startPos.y + Constants.MaxHeighGrasshopperJump;
         while (transform.position != target)
         {
             if (Vector3.Distance(transform.position, newCell.transform.position) > distance / 2 && target.y < maxY)

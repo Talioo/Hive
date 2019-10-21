@@ -5,7 +5,6 @@ using UnityEngine;
 public class Beetle : HiveMember
 {
     private Vector3 startPos;
-    private const float heigh = 0.02f;
     protected override void Start()
     {
         base.Start();
@@ -15,7 +14,7 @@ public class Beetle : HiveMember
     {
         Vector3 target = newCell.transform.position;
         if (newCell is HexaCell)
-            target.y = startPos.y + ((newCell as HexaCell).hiveMembersOnMe.Count * heigh);
+            target.y = startPos.y + ((newCell as HexaCell).hiveMembersOnMe.Count * Constants.FigureHeight);
         else
             target.y = startPos.y;
         while (transform.position != target)

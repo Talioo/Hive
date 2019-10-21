@@ -26,7 +26,7 @@ public class EmptyCell : Cell
     {
         for (int i = 0; i < hexaInfo.hexaCellsOnScene.Count; i++)
         {
-            if (Vector3.Distance(hexaInfo.hexaCellsOnScene[i].transform.position, transform.position) < 0.15f)
+            if (Vector3.Distance(hexaInfo.hexaCellsOnScene[i].transform.position, transform.position) < Constants.DistanceToHexa)
                 return true;
         }
         return false;

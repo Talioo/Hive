@@ -43,9 +43,9 @@ public class CellNumerator
     int FindNeighbourIndex(HexaCell neighbour)
     {
         int index = -1;
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < Constants.CellsPerHexaCell; i++)
         {
-            if (Vector3.Distance(HexaCell.availableCells[i].transform.position, neighbour.transform.position) < 0.15f)
+            if (GetDistance(HexaCell.availableCells[i], neighbour) < Constants.DistanceToHexa)
                 index = HexaCell.availableCells[i].cellNum;
         }
         if(index == -1)
@@ -62,15 +62,17 @@ public class CellNumerator
         currentCell.neighbours.RemoveAll(x => x == null);
         for (int i = 0; i < currentCell.neighbours.Count; i++)
         {
-            if (Vector3.Distance(currentCell.neighbours[i].transform.position, empty.transform.position) < 0.15f)
+            if (GetDistance(currentCell.neighbours[i], empty) < Constants.DistanceToHexa)
                 neighbour = currentCell.neighbours[i];
         }
         return neighbour;
     }
-
+    float GetDistance(Cell cellOne, Cell cellTwo)
+    {
+        return Vector3.Distance(cellOne.transform.position, cellTwo.transform.position);
+    }
     EmptyCell FindEmptyWithIndex(int index, HexaCell hexaCell)
     {
-        return 
-            hexaCell.availableCells.Find(x => x.cellNum == index);
+        return hexaCell.availableCells.Find(x => x.cellNum == index);
     }
 }

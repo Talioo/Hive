@@ -9,7 +9,6 @@ public class Cell : MonoBehaviour
     public List<HiveMember> hiveMembersOnMe { get; private set; }
     public SpriteRenderer sprite { get; private set; }
     private Color startColor;
-    private const float rayLenght = 100f;
     private bool canSpawnOnMe = false;
     public virtual void Start()
     {
@@ -59,7 +58,7 @@ public class Cell : MonoBehaviour
     }
     public bool CheckIsEmpty()
     {
-        RaycastHit[] raycastHit = Physics.RaycastAll(transform.position + Vector3.down, Vector3.up, rayLenght);
+        RaycastHit[] raycastHit = Physics.RaycastAll(transform.position + Vector3.down, Vector3.up, Constants.RayLenght);
         return raycastHit.Length == 0;
     }
     public virtual void OnDestroy()
