@@ -8,8 +8,6 @@ public class UIController : MonoBehaviour
 {
     private UIMember spawningMember;
     private IEnumerator waitingForAprove;
-    private bool firstSpawn = true;
-
     public delegate void NewMemberSpawn(bool value);
     public event NewMemberSpawn OnNewMemberSpawning;
 

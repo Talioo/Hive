@@ -20,7 +20,7 @@ public class Beetle : HiveMember
         SOInstances.GameManager.selectedHiveMember = this;
         MarkCellsToMove();
     }
-    public override IEnumerator CrawlToTarget(Cell newCell)
+    public override IEnumerator JumpToTarget(Cell newCell)
     {
         Vector3 target = newCell.transform.position;
         if (newCell is HexaCell)

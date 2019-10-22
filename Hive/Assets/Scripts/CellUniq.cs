@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CellUniq : MonoBehaviour
+public class CellUniq
 {
     public EmptyCell uniqueCell { get; private set; }
     public Vector3 uniqPos { get; private set; }
@@ -36,14 +36,22 @@ public class CellUniq : MonoBehaviour
         duplicatedCellsList.RemoveAll(x => x == null);
         if (duplicatedCellsList.Count > 0)
         {
-            UpdateUniqueCell(duplicatedCellsList[0]);
-            duplicatedCellsList.Remove(duplicatedCellsList[0]);
+            var newEmpty = duplicatedCellsList[0];
+            duplicatedCellsList.Remove(newEmpty);
+            UpdateUniqueCell(newEmpty);
         }
     }
     private void UpdateUniqueCell(EmptyCell emptyCell)
     {
         uniqueCell = emptyCell;
         uniqueCell.gameObject.SetActive(true);
+        if (duplicatedCellsList.Count == 0)
+            return;
+        foreach (var item in duplicatedCellsList)
+        {
+            if (uniqueCell.masterCell.Find(x => x == item.masterCell[0]) == null)
+                uniqueCell.masterCell.Add(item.masterCell[0]);
+        }
     }
     private void UpdateDuplicateCell(EmptyCell emptyCell)
     {

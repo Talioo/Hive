@@ -24,7 +24,7 @@ public class Grasshopper : HiveMember
         while (transform.position != target)
         {
             if (Vector3.Distance(transform.position, newCell.transform.position) > distance / 2 && target.y < maxY)
-                target.y += 0.01f;
+                target.y += 0.05f;
             else
                 target.y -= 0.01f;
             if (target.y < startPos.y)
