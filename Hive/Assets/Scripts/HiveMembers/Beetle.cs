@@ -10,6 +10,16 @@ public class Beetle : HiveMember
         base.Start();
         startPos = transform.position;
     }
+    protected override void Select()
+    {
+        if(startPos.y == transform.position.y)
+        {
+            if (!myCell.CanIMove(this))
+                return;
+        }
+        SOInstances.GameManager.selectedHiveMember = this;
+        MarkCellsToMove();
+    }
     public override IEnumerator CrawlToTarget(Cell newCell)
     {
         Vector3 target = newCell.transform.position;

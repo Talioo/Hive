@@ -33,8 +33,8 @@ public class EmptyCell : Cell
     }
     public override void ReadyToUse(bool value)
     {
-        //if (alreadyTaken && value)
-        //    return;
+        if (value && WillBreakHive())
+            return;
         if (value)
         {
             var uniq = hexaInfo.duplicateCells.GetUniqCell(this);
@@ -46,6 +46,24 @@ public class EmptyCell : Cell
         else
             base.ReadyToUse(value);
 
+    }
+    bool WillBreakHive()
+    {
+        if (masterCell.Count > 1)
+            return false;
+        if (SOInstances.GameManager.selectedHiveMember == null)
+            return false;
+        if (masterCell[0] != SOInstances.GameManager.selectedHiveMember.myCell)
+            return false;
+        if (SOInstances.GameManager.selectedHiveMember is Beetle)
+            return IsTheBetleUnder();
+        return true;
+    }
+    bool IsTheBetleUnder()
+    {
+        if (masterCell[0].hiveMembersOnMe[0] != SOInstances.GameManager.selectedHiveMember)
+            return false;
+        return true;
     }
     private void OnDrawGizmos()
     {
