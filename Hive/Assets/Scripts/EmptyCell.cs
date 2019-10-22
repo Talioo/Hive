@@ -33,8 +33,14 @@ public class EmptyCell : Cell
     }
     public override void ReadyToUse(bool value)
     {
-        //if (alreadyTaken && value)
-        //    return;
+        if (value && SOInstances.GameManager.selectedHiveMember != null)
+        {
+            if (WillBreakHive())
+                return;
+            if (SOInstances.GameManager.selectedHiveMember.MoveType == MoveType.Crawl)
+                if (!CanCrawlOnMe())
+                    return;
+        }
         if (value)
         {
             var uniq = hexaInfo.duplicateCells.GetUniqCell(this);
@@ -46,6 +52,35 @@ public class EmptyCell : Cell
         else
             base.ReadyToUse(value);
 
+    }
+    bool WillBreakHive()
+    {
+        if (masterCell.Count > 1)
+            return false;
+        if (masterCell[0] != SOInstances.GameManager.selectedHiveMember.myCell)
+            return false;
+        if (SOInstances.GameManager.selectedHiveMember is Beetle)
+            return IsTheBetleUnder();
+        return true;
+    }
+    bool IsTheBetleUnder()
+    {
+        if (masterCell[0].hiveMembersOnMe[0] != SOInstances.GameManager.selectedHiveMember)
+            return false;
+        return true;
+    }
+    bool CanCrawlOnMe()
+    {
+        var mainCell = SOInstances.GameManager.selectedHiveMember.myCell;
+        int count = 0;
+        for (int i = 0; i < mainCell.neighbours.Count; i++)
+        {
+            if (masterCell.Find(x => x == mainCell.neighbours[i]) != null)
+                count++;
+            if (count == 2)
+                return false;
+        }
+        return true;
     }
     private void OnDrawGizmos()
     {

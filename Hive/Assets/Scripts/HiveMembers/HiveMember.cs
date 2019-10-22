@@ -54,7 +54,7 @@ public class HiveMember : MonoBehaviour
         SOInstances.GameManager.selectedHiveMember = null;
         hexaInfo.TryToRemoveCells();
     }
-    private void Select()
+    protected virtual void Select()
     {
         if (!myCell.CanIMove(this))
             return;

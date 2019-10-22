@@ -76,9 +76,8 @@ public class HexaCell : Cell
     }
     public bool CanIMove(HiveMember member)
     {
-        //@TODO: Add better algoritm to find if cell cen be removed
-        //if (!hexaInfo.CanRemoveCell(this))
-        //    return false;
+        if (!hexaInfo.CanRemoveCell(this))
+            return false;
         if (hiveMembersOnMe.Count == 0)
             return true;
         return hiveMembersOnMe[hiveMembersOnMe.Count - 1] == member;
