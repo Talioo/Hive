@@ -33,7 +33,7 @@ public class Beetle : HiveMember
             yield return null;
         }
         target.y = startPos.y;
-        hexaInfo.TryToRemoveCells();
+        SOInstances.SOHexaInfo.TryToRemoveCells();
         yield return null;
         if (newCell is HexaCell)
             NewMemberPosition(target, newCell as HexaCell);
@@ -42,14 +42,14 @@ public class Beetle : HiveMember
     }
     public override void NewMemberPosition(Vector3 target)
     {
-        myCell = hexaInfo.CreateNewCell(target);
+        myCell = SOInstances.SOHexaInfo.CreateNewCell(target);
         SOInstances.GameManager.selectedHiveMember = null;
-        hexaInfo.duplicateCells.RestructCells();
+        SOInstances.SODuplicateCells.RestructCells();
     }
     public void NewMemberPosition(Vector3 target, HexaCell newCell)
     {
         myCell = newCell;
         SOInstances.GameManager.selectedHiveMember = null;
-        hexaInfo.duplicateCells.RestructCells();
+        SOInstances.SODuplicateCells.RestructCells();
     }
 }

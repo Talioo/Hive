@@ -47,6 +47,6 @@ public class MarkCells
     }
     private static void MarkForSoldierAnt(HexaCell cell)
     {
-
+        SOInstances.SODuplicateCells.GetAllUniqCells().ForEach(x => x.ReadyToUse(true));
     }
 }

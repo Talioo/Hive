@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
-    public SOHexaInfo hexaInfo;
     [HideInInspector] public bool readyToUse = false;
     public List<HiveMember> hiveMembersOnMe { get; private set; }
     public SpriteRenderer sprite { get; private set; }
@@ -14,20 +13,23 @@ public class Cell : MonoBehaviour
     {
         sprite = GetComponent<SpriteRenderer>();
         startColor = sprite.color;
-        hexaInfo.AddNewCell(this);
+        SOInstances.SOHexaInfo.AddNewCell(this);
         SOInstances.UIController.OnNewMemberSpawning += TryToSpawnOnMe;
         hiveMembersOnMe = new List<HiveMember>();
-        hexaInfo.OnRemoveCells += RemoveCells;
+        SOInstances.SOHexaInfo.OnRemoveCells += RemoveCells;
     }
     public void OnMouseDown()
     {
         if (canSpawnOnMe)
         {
             SOInstances.UIController.Aprove(this);
-            hexaInfo.TryToRemoveCells();
+            SOInstances.SOHexaInfo.TryToRemoveCells();
         }
         if (readyToUse)
+        {
             SOInstances.GameManager.selectedHiveMember.Move(this);
+            SOInstances.SOHexaInfo.TryToRemoveCells();
+        }
     }
     public virtual void ReadyToUse(bool value)
     {
@@ -63,9 +65,8 @@ public class Cell : MonoBehaviour
     }
     public virtual void OnDestroy()
     {
-        hexaInfo.RemoveCell(this);
-        hexaInfo.duplicateCells.RestructCells();
+        SOInstances.SODuplicateCells.RestructCells();
         SOInstances.UIController.OnNewMemberSpawning -= TryToSpawnOnMe;
-        hexaInfo.OnRemoveCells -= RemoveCells;
+        SOInstances.SOHexaInfo.OnRemoveCells -= RemoveCells;
     }
 }

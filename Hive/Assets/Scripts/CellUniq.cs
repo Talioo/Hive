@@ -2,24 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class CellUniq
 {
     public EmptyCell uniqueCell { get; private set; }
     public Vector3 uniqPos { get; private set; }
     private List<EmptyCell> duplicatedCellsList;
-    private SODuplicateCells duplicateCellsSO;
 
-    public CellUniq(EmptyCell emptyCell, SODuplicateCells duplicateCells)
+    public CellUniq(EmptyCell emptyCell)
     {
         duplicatedCellsList = new List<EmptyCell>();
         uniqueCell = emptyCell;
         uniqPos = uniqueCell.transform.position;
-        duplicateCellsSO = duplicateCells;
-        duplicateCellsSO.OnRestruct += Restruct;
+        SOInstances.SODuplicateCells.OnRestruct += Restruct;
+        SOInstances.SOHexaInfo.OnAddCell += NewHexa;
+        SOInstances.SOHexaInfo.OnDestroyCell += RemoveHexa;
     }
     public bool IsOnMyPosition(EmptyCell emptyCell)
     {
-        var value = Vector3.Distance(uniqPos, emptyCell.transform.position) < Constants.DistanceToCheckMyPos;
+        var value = CheckDistance(emptyCell);
         if (value)
         {
             if (uniqueCell == null)
@@ -28,6 +29,24 @@ public class CellUniq
                 UpdateDuplicateCell(emptyCell);
         }
         return value;
+    }
+    private void NewHexa(HexaCell hexaCell)
+    {
+        if (!CheckDistance(hexaCell))
+            return;
+        if (uniqueCell != null)
+            uniqueCell.gameObject.SetActive(false);
+    }
+    private void RemoveHexa(HexaCell hexaCell)
+    {
+        if (!CheckDistance(hexaCell))
+            return;
+        if (uniqueCell != null)
+            uniqueCell.gameObject.SetActive(true); 
+    }
+    private bool CheckDistance(Cell cell)
+    {
+        return Vector3.Distance(uniqPos, cell.transform.position) < Constants.DistanceToCheckMyPos;
     }
     private void Restruct()
     {
@@ -44,7 +63,7 @@ public class CellUniq
     private void UpdateUniqueCell(EmptyCell emptyCell)
     {
         uniqueCell = emptyCell;
-        uniqueCell.gameObject.SetActive(true);
+        uniqueCell.gameObject.SetActive(!uniqueCell.IsHexaCellNowOnMe());
         if (duplicatedCellsList.Count == 0)
             return;
         foreach (var item in duplicatedCellsList)
@@ -61,6 +80,8 @@ public class CellUniq
     }
     private void OnDisable()
     {
-        duplicateCellsSO.OnRestruct -= Restruct;
+        SOInstances.SODuplicateCells.OnRestruct -= Restruct;
+        SOInstances.SOHexaInfo.OnAddCell -= NewHexa;
+        SOInstances.SOHexaInfo.OnDestroyCell -= RemoveHexa;
     }
 }

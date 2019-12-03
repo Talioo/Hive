@@ -5,11 +5,13 @@ using UnityEngine;
 public class SOHexaInfo : ScriptableObject
 {
     public GameObject hexaPrefab;
-    public SODuplicateCells duplicateCells;
 
     public List<HexaCell> hexaCellsOnScene { get; private set; }
     public delegate void RemoveCells();
     public event RemoveCells OnRemoveCells;
+    public delegate void AddDestroyCell(HexaCell hexaCell);
+    public event AddDestroyCell OnAddCell;
+    public event AddDestroyCell OnDestroyCell;
     private void OnEnable()
     {
         hexaCellsOnScene = new List<HexaCell>();
@@ -38,12 +40,12 @@ public class SOHexaInfo : ScriptableObject
         if(cell is HexaCell)
             hexaCellsOnScene.Add(cell as HexaCell);
         if (cell is EmptyCell)
-            duplicateCells.AddNewCell(cell as EmptyCell);
+            SOInstances.SODuplicateCells.AddNewCell(cell as EmptyCell);
     }
-    public void RemoveCell(Cell cell)
+    public void RemoveCell(HexaCell cell)
     {
-        if (cell is HexaCell)
-            hexaCellsOnScene.Remove(cell as HexaCell);
+        OnDestroyCell.Invoke(cell);
+        hexaCellsOnScene.Remove(cell);
     }
     public List<HexaCell> GetFreeCells()
     {
@@ -52,9 +54,12 @@ public class SOHexaInfo : ScriptableObject
     public void TryToRemoveCells()
     {
         OnRemoveCells.Invoke();
+        SOInstances.SODuplicateCells.RestructCells();
     }
     public HexaCell CreateNewCell(Vector3 position)
     {
-        return Instantiate(hexaPrefab, position, hexaPrefab.transform.rotation).GetComponent<HexaCell>();
+        var newHexa = Instantiate(hexaPrefab, position, hexaPrefab.transform.rotation).GetComponent<HexaCell>();
+        OnAddCell.Invoke(newHexa);
+        return newHexa;
     }
 }

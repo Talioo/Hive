@@ -1293,6 +1293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedHiveMember: {fileID: 0}
   loseScreen: {fileID: 905047137}
+  container: {fileID: 11400000, guid: 88fc56a2494a0424d887a53569c8f321, type: 2}
 --- !u!1 &8157186832781165341
 GameObject:
   m_ObjectHideFlags: 0
@@ -2300,7 +2301,8 @@ MonoBehaviour:
   - {fileID: 8157186833368032404}
   - {fileID: 8157186833419148525}
   button: {fileID: 8157186833869529874}
-  spavningPrefab: {fileID: 0}
+  spavningPrefab: {fileID: 8705779847474532776, guid: bdb4ea059701ec941b87c5d3ea727ce9,
+    type: 3}
 --- !u!1 &8157186833671469688
 GameObject:
   m_ObjectHideFlags: 0

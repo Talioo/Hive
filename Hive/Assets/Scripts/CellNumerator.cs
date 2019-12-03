@@ -75,4 +75,13 @@ public class CellNumerator
     {
         return hexaCell.availableCells.Find(x => x.cellNum == index);
     }
+
+    public List<EmptyCell> AntTargets()
+    {
+        List<EmptyCell> targets = new List<EmptyCell>();
+
+        SOInstances.SODuplicateCells.GetAllUniqCells().ForEach(x => x.ReadyToUse(true));
+
+        return targets;
+    }
 }

@@ -33,7 +33,7 @@ public class Grasshopper : HiveMember
             yield return null;
         }
         target.y = startPos.y;
-        hexaInfo.TryToRemoveCells();
+        SOInstances.SOHexaInfo.TryToRemoveCells();
         yield return null;
         NewMemberPosition(target);
     }

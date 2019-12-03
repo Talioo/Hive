@@ -41,6 +41,7 @@ public class HexaCell : Cell
     {
         neighbours.ForEach(x => x.RemoveMe(this));
         availableCells.ForEach(x => x.RemoveMasterCell(this));
+        SOInstances.SOHexaInfo.RemoveCell(this);
         base.OnDestroy();
     }
     #endregion
@@ -76,7 +77,7 @@ public class HexaCell : Cell
     }
     public bool CanIMove(HiveMember member)
     {
-        if (!hexaInfo.CanRemoveCell(this))
+        if (!SOInstances.SOHexaInfo.CanRemoveCell(this))
             return false;
         if (hiveMembersOnMe.Count == 0)
             return true;

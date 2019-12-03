@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class HiveMember : MonoBehaviour
 {
-    public SOHexaInfo hexaInfo;
     public MemberType MemberType;
     public MoveType MoveType;
     public HexaCell myCell;
 
-    protected float moveSpeed = 0.5f;
+    protected const float moveSpeed = 0.7f;
     protected virtual void Start()
     {
         if (myCell == null)
-            myCell = hexaInfo.CreateNewCell(transform.position);
-        hexaInfo.duplicateCells.RestructCells();
+            myCell = SOInstances.SOHexaInfo.CreateNewCell(transform.position);
+        SOInstances.SODuplicateCells.RestructCells();
     }
     public void OnMouseDown()
     {
-        hexaInfo.duplicateCells.RestructCells();
+        if (SOInstances.GameManager.selectedHiveMember != null)
+            return;
+        SOInstances.SODuplicateCells.RestructCells();
         ChoseSelected(SOInstances.GameManager.selectedHiveMember);
     }
     void ChoseSelected(HiveMember selectedMember)
@@ -52,11 +53,13 @@ public class HiveMember : MonoBehaviour
     protected virtual void Unselect()
     {
         SOInstances.GameManager.selectedHiveMember = null;
-        hexaInfo.TryToRemoveCells();
+        SOInstances.SOHexaInfo.TryToRemoveCells();
     }
     protected virtual void Select()
     {
         if (!myCell.CanIMove(this))
+            return;
+        if (SOInstances.SODuplicateCells.AmISurrounded(this))
             return;
         SOInstances.GameManager.selectedHiveMember = this;
         MarkCellsToMove();
@@ -76,7 +79,7 @@ public class HiveMember : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
             yield return null;
         }
-        hexaInfo.TryToRemoveCells();
+        SOInstances.SOHexaInfo.TryToRemoveCells();
         yield return null;
         NewMemberPosition(target);
     }
@@ -86,9 +89,9 @@ public class HiveMember : MonoBehaviour
     }
     public virtual void NewMemberPosition(Vector3 target)
     {
-        myCell = hexaInfo.CreateNewCell(target);
+        myCell = SOInstances.SOHexaInfo.CreateNewCell(target);
         SOInstances.GameManager.selectedHiveMember = null;
-        hexaInfo.duplicateCells.RestructCells();
+        SOInstances.SODuplicateCells.RestructCells();
     }
     public virtual void MarkCellsToMove()
     {

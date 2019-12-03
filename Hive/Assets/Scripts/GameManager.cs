@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [HideInInspector] public HiveMember selectedHiveMember;
-    [SerializeField] GameObject loseScreen;
+    [SerializeField] private GameObject loseScreen;
+    [SerializeField] private SOContainer container;
     private void Awake()
     {
         SOInstances.SetInstance(this);
+        SOInstances.SetInstance(container);
         loseScreen.SetActive(false);
     }
 
