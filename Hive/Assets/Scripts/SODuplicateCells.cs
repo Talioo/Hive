@@ -67,9 +67,9 @@ public class SODuplicateCells : ScriptableObject
     }
     public void AddNewCell(EmptyCell cell)
     {
-        foreach (var item in uniqCells)
+        for (int i = 0; i < uniqCells.Count; i++)
         {
-            if (item.IsOnMyPosition(cell))
+            if (uniqCells[i].IsOnMyPosition(cell))
                 return;
         }
         uniqCells.Add(new CellUniq(cell));
@@ -82,10 +82,10 @@ public class SODuplicateCells : ScriptableObject
     public List<EmptyCell> GetAllUniqCells()
     {
         List<EmptyCell> listUniques = new List<EmptyCell>();
-        foreach (var item in uniqCells)
+        for (int i = 0; i < uniqCells.Count; i++)
         {
-            if(item.uniqueCell != null)
-                listUniques.Add(item.uniqueCell);
+            if (uniqCells[i].uniqueCell != null)
+                listUniques.Add(uniqCells[i].uniqueCell);
         }
         return listUniques;
     }

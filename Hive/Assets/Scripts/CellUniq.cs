@@ -66,10 +66,10 @@ public class CellUniq
         uniqueCell.gameObject.SetActive(!uniqueCell.IsHexaCellNowOnMe());
         if (duplicatedCellsList.Count == 0)
             return;
-        foreach (var item in duplicatedCellsList)
+        for (int i = 0; i < duplicatedCellsList.Count; i++)
         {
-            if (uniqueCell.masterCell.Find(x => x == item.masterCell[0]) == null)
-                uniqueCell.masterCell.Add(item.masterCell[0]);
+            if (uniqueCell.masterCell.Find(x => x == duplicatedCellsList[i].masterCell[0]) == null)
+                uniqueCell.masterCell.Add(duplicatedCellsList[i].masterCell[0]);
         }
     }
     private void UpdateDuplicateCell(EmptyCell emptyCell)

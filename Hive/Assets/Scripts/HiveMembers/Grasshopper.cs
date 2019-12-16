@@ -13,7 +13,8 @@ public class Grasshopper : HiveMember
     }
     protected override void Unselect()
     {
-        possibleCells.ForEach(x => x.ReadyToUse(false));
+        for (int i = 0; i < possibleCells.Count; i++)
+            possibleCells[i].ReadyToUse(false);
         base.Unselect();
     }
     public override IEnumerator JumpToTarget(Cell newCell)

@@ -32,7 +32,8 @@ public class SOHexaInfo : ScriptableObject
                 break;
             }
         }
-        hexaCellsOnScene.ForEach(x => x.isMarked = false);
+        for (int i = 0; i < hexaCellsOnScene.Count; i++)
+            hexaCellsOnScene[i].isMarked = false;
         return canRemove;
     }
     public void AddNewCell(Cell cell)

@@ -30,9 +30,10 @@ public class Ant : HiveMember
     {
         List<Vector3> target = new List<Vector3>();
         DijkstraAlgoritm algoritm = new DijkstraAlgoritm(this, SOInstances.SODuplicateCells.GetUniqCell(lastCell as EmptyCell));
-        foreach (var item in algoritm.FindWay())
+        var way = algoritm.FindWay();
+        for (int i = 0; i < way.Count; i++)
         {
-            target.Add(item.transform.position);
+            target.Add(way[i].transform.position);
         }
         return target;
     }

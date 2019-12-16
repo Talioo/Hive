@@ -76,12 +76,12 @@ public class CellNumerator
         return hexaCell.availableCells.Find(x => x.cellNum == index);
     }
 
-    public List<EmptyCell> AntTargets()
+    public void AntTargets()
     {
-        List<EmptyCell> targets = new List<EmptyCell>();
-
-        SOInstances.SODuplicateCells.GetAllUniqCells().ForEach(x => x.ReadyToUse(true));
-
-        return targets;
+        var list = SOInstances.SODuplicateCells.GetAllUniqCells();
+        for (int i = 0; i < list.Count; i++)
+        {
+            list[i].ReadyToUse(true);
+        }
     }
 }
