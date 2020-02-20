@@ -20,9 +20,7 @@
 
 namespace GoogleARCore.Examples.CloudAnchors
 {
-    using GoogleARCore;
     using UnityEngine;
-    using UnityEngine.Networking;
 
     /// <summary>
     /// A controller for the Star object that handles setting mesh after the world origin has been

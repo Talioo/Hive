@@ -21,7 +21,6 @@
 namespace GoogleARCore
 {
     using GoogleARCoreInternal;
-    using UnityEngine;
 
     /// <summary>
     /// Structure holding data summarizing the result of an Android permissions request.

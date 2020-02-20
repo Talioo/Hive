@@ -20,11 +20,6 @@
 
 namespace GoogleARCore.CrossPlatform
 {
-    using System;
-    using System.Collections.Generic;
-    using GoogleARCoreInternal;
-    using UnityEngine;
-
     /// <summary>
     /// The result of a cloud service operation that returns a cloud anchor.
     /// </summary>

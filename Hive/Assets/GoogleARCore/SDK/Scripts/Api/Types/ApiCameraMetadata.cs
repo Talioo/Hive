@@ -24,9 +24,7 @@
 namespace GoogleARCoreInternal
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.InteropServices;
-    using UnityEngine;
 
     internal enum NdkCameraMetadataType
     {

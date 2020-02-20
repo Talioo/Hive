@@ -20,9 +20,7 @@
 
 namespace GoogleARCoreInternal
 {
-    using System.Diagnostics.CodeAnalysis;
     using GoogleARCore;
-    using UnityEngine;
 
     internal static class ApiDisplayUvCoordsExtensions
     {

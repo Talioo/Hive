@@ -20,7 +20,6 @@
 
 namespace GoogleARCore.Examples.ObjectManipulation
 {
-    using System.Collections.Generic;
     using GoogleARCore;
     using UnityEngine;
 

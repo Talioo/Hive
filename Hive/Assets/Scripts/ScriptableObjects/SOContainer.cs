@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SO Container", menuName = "Custom/SOContainer")]
 public class SOContainer : ScriptableObject

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Cell">
+    <Position X="6" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgBAAAIgCAAAAAAAAAAgAAAABAAAAAAoABAAEAIAAA=</HashCode>
+      <FileName>Assets\Scripts\Cell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EmptyCell">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgGAQEIACAAAAAAAAgAAAAAAAKAEAgAAAAAiAAACAA=</HashCode>
+      <FileName>Assets\Scripts\EmptyCell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HexaCell">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DAABgAAAgCAACACBAAEQAgAACAAAAACMAAABAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\HexaCell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

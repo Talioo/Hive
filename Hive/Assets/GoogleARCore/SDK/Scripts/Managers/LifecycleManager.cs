@@ -20,8 +20,6 @@
 
 namespace GoogleARCoreInternal
 {
-    using System;
-    using GoogleARCore;
     using UnityEngine;
 
     internal class LifecycleManager

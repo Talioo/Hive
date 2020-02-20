@@ -5,9 +5,9 @@ public class HexaCell : Cell
 {
     #region Parametrs
     public List<EmptyCell> availableCells;
+    public List<HexaCell> neighbours;
     public bool isMarked = false;
     public bool IsFree { get { return hiveMembersOnMe.Count == 0; } }
-    public List<HexaCell> neighbours;
     #endregion
     #region Unity methods
     public override void Start()

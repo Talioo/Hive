@@ -21,8 +21,6 @@
 namespace GoogleARCoreInternal
 {
     using System;
-    using GoogleARCore;
-
 #if UNITY_IOS && !UNITY_EDITOR
     using AndroidImport = GoogleARCoreInternal.DllImportNoop;
     using IOSImport = System.Runtime.InteropServices.DllImportAttribute;

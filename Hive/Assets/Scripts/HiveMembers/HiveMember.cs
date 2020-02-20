@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HiveMember : MonoBehaviour
@@ -8,6 +7,7 @@ public class HiveMember : MonoBehaviour
     public MoveType MoveType;
     public HexaCell myCell;
 
+    HiveMember selected { get { return SOInstances.GameManager.selectedHiveMember; } }
     protected const float moveSpeed = 0.7f;
     protected virtual void Start()
     {
@@ -17,24 +17,27 @@ public class HiveMember : MonoBehaviour
     }
     public void OnMouseDown()
     {
-        if (SOInstances.GameManager.selectedHiveMember != null)
-            return;
-        SOInstances.SODuplicateCells.RestructCells();
-        ChoseSelected(SOInstances.GameManager.selectedHiveMember);
-    }
-    void ChoseSelected(HiveMember selectedMember)
-    {
-        if (selectedMember != null)
+        if (selected != null)
         {
-            if (selectedMember == this)
+            if (!(selected as Beetle) && selected != this)
+                return;
+        }
+        SOInstances.SODuplicateCells.RestructCells();
+        ChoseSelected();
+    }
+    void ChoseSelected()
+    {
+        if (selected != null)
+        {
+            if (selected == this)
             {
                 Unselect();
                 return;
             }
-            if (selectedMember is Beetle)
+            if (selected is Beetle)
             {
                 if (myCell.readyToUse)
-                    selectedMember.Move(myCell);
+                    selected.Move(myCell);
                 else
                 {
                     Unselect();

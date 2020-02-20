@@ -23,7 +23,6 @@ namespace GoogleARCore.Examples.AugmentedFaces
     using System.Collections.Generic;
     using GoogleARCore;
     using UnityEngine;
-    using UnityEngine.UI;
 
     /// <summary>
     /// Controller for the AugmentedFaces sample scene.

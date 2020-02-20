@@ -20,7 +20,6 @@
 
 namespace GoogleARCoreInternal
 {
-    using System.Collections.Generic;
     using GoogleARCore;
 
     internal static class ApiAvailabilityExtensions

@@ -21,7 +21,6 @@
 
 namespace GoogleARCoreInternal
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
     using GoogleARCore;
 
