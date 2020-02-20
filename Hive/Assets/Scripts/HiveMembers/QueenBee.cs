@@ -1,17 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class QueenBee : HiveMember
+﻿public class QueenBee : HiveMember
 {
-    public override void NewMemberPosition(Vector3 target)
+    protected override void Start()
     {
-        base.NewMemberPosition(target);
-        CheckGameOver();
+        base.Start();
+        SOInstances.SOHexaInfo.OnAddCell += CheckGameOver;
     }
-    void CheckGameOver()
+
+    private void CheckGameOver(HexaCell hexaCell)
     {
         if (myCell.neighbours.Count == Constants.CellsPerHexaCell)
             SOInstances.GameManager.Lose();
+    }
+    private void OnDisable()
+    {
+        SOInstances.SOHexaInfo.OnAddCell -= CheckGameOver;
     }
 }

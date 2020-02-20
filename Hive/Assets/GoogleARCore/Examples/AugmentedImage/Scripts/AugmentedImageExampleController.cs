@@ -21,10 +21,8 @@
 namespace GoogleARCore.Examples.AugmentedImage
 {
     using System.Collections.Generic;
-    using System.Runtime.InteropServices;
     using GoogleARCore;
     using UnityEngine;
-    using UnityEngine.UI;
 
     /// <summary>
     /// Controller for AugmentedImage example.

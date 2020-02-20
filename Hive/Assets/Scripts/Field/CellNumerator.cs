@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class CellNumerator
@@ -74,5 +73,14 @@ public class CellNumerator
     EmptyCell FindEmptyWithIndex(int index, HexaCell hexaCell)
     {
         return hexaCell.availableCells.Find(x => x.cellNum == index);
+    }
+
+    public void AntTargets()
+    {
+        var list = SOInstances.SODuplicateCells.GetAllUniqCells();
+        for (int i = 0; i < list.Count; i++)
+        {
+            list[i].ReadyToUse(true);
+        }
     }
 }

@@ -23,7 +23,6 @@ namespace GoogleARCore
     using System;
     using System.Runtime.InteropServices;
     using GoogleARCoreInternal;
-    using UnityEngine;
 
     /// <summary>
     /// Struct to contain camera metadata's value. When querying data from the struct, caller is

@@ -21,7 +21,6 @@
 namespace GoogleARCore.CrossPlatform
 {
     using GoogleARCoreInternal.CrossPlatform;
-    using UnityEngine;
 
 #if ARCORE_IOS_SUPPORT
     using UnityEngine.XR.iOS;

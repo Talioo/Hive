@@ -7,7 +7,6 @@
 namespace GoogleARCoreInternal
 {
     using System;
-    using UnityEngine;
 
     /// <summary>
     /// A custom Attribute class to annotate functions that are allowed to allocate memory.

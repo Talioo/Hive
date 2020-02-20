@@ -21,7 +21,6 @@ namespace GoogleARCore
 {
     using System;
     using GoogleARCoreInternal;
-    using UnityEngine;
 
     /// <summary>
     /// Deprecated version of DetectedPlane.

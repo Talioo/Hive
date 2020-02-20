@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public class MarkCells
 {
@@ -29,7 +27,7 @@ public class MarkCells
     }
     private static void MarkForQueen(HexaCell cell)
     {
-        cell.availableCells.ForEach(x => x.ReadyToUse(true));
+        SetReadyToUse(cell.availableCells);
     }
     private static void MarkForSpider(HexaCell cell)
     {
@@ -37,16 +35,22 @@ public class MarkCells
     }
     private static void MarkForBeetle(HexaCell cell)
     {
-        cell.neighbours.ForEach(x => x.ReadyToUse(true));
-        cell.availableCells.ForEach(x => x.ReadyToUse(true));
+        for (int i = 0; i < cell.neighbours.Count; i++)
+            cell.neighbours[i].ReadyToUse(true);
+        SetReadyToUse(cell.availableCells);
     }
     private static void MarkForGrasshopper(HexaCell cell)
     {
         var helper = new CellNumerator(cell);
-        helper.GrasshoppersTargets().ForEach(x => x.ReadyToUse(true));
+        SetReadyToUse(helper.GrasshoppersTargets());
     }
     private static void MarkForSoldierAnt(HexaCell cell)
     {
-
+        SetReadyToUse(SOInstances.SODuplicateCells.GetAllUniqCells());
+    }
+    private static void SetReadyToUse(List<EmptyCell> cells)
+    {
+        for (int i = 0; i < cells.Count; i++)
+            cells[i].ReadyToUse(true);
     }
 }

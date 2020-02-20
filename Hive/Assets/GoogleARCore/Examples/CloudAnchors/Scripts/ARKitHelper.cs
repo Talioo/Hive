@@ -20,7 +20,6 @@
 
 namespace GoogleARCore.Examples.CloudAnchors
 {
-    using System.Collections.Generic;
     using UnityEngine;
 
 #if ARCORE_IOS_SUPPORT

@@ -20,9 +20,6 @@
 
 namespace GoogleARCoreInternal
 {
-    using System.Collections;
-    using UnityEngine;
-
     internal enum ApiArStatus
     {
         // The operation was successful.

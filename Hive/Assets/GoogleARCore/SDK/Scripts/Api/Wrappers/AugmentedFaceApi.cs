@@ -23,7 +23,6 @@ namespace GoogleARCoreInternal
     using System;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
-    using GoogleARCoreInternal;
     using UnityEngine;
 
 #if UNITY_IOS && !UNITY_EDITOR

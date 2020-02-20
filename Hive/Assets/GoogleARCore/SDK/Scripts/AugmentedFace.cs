@@ -22,11 +22,8 @@ namespace GoogleARCore
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using GoogleARCore;
     using GoogleARCoreInternal;
     using UnityEngine;
-    using UnityEngine.Profiling;
 
     /// <summary>
     /// A face detected and trackable by ARCore.

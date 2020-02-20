@@ -21,9 +21,6 @@
 namespace GoogleARCoreInternal
 {
     using System;
-    using System.Collections.Generic;
-    using GoogleARCore;
-    using UnityEngine;
 
     internal class PointCloudManager
     {

@@ -21,9 +21,7 @@
 namespace GoogleARCore
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using GoogleARCoreInternal;
-    using UnityEngine;
 
     /// <summary>
     /// An ARCore camera image with its data accessible from the CPU in YUV-420-888 format.

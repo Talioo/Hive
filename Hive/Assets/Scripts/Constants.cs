@@ -6,5 +6,6 @@
     public const float RayLenght = 100f;
     public const float FigureHeight = 0.02f;
     public const float DistanceToHexa = 0.15f;
+    public const float DistanceBetweenCells = 0.163517f;
 
 }

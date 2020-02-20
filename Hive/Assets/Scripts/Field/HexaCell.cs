@@ -5,9 +5,9 @@ public class HexaCell : Cell
 {
     #region Parametrs
     public List<EmptyCell> availableCells;
+    public List<HexaCell> neighbours;
     public bool isMarked = false;
     public bool IsFree { get { return hiveMembersOnMe.Count == 0; } }
-    public List<HexaCell> neighbours;
     #endregion
     #region Unity methods
     public override void Start()
@@ -39,9 +39,16 @@ public class HexaCell : Cell
     }
     public override void OnDestroy()
     {
-        neighbours.ForEach(x => x.RemoveMe(this));
-        availableCells.ForEach(x => x.RemoveMasterCell(this));
+        DestroyEvent();
+        SOInstances.SOHexaInfo.RemoveCell(this);
         base.OnDestroy();
+    }
+    void DestroyEvent()
+    {
+        for (int i = 0; i < neighbours.Count; i++)
+            neighbours[i].RemoveMe(this);
+        for (int i = 0; i < availableCells.Count; i++)
+            availableCells[i].RemoveMasterCell(this);
     }
     #endregion
     #region Public methods
@@ -53,9 +60,9 @@ public class HexaCell : Cell
     }
     public void AddEmptyCell(EmptyCell emptyCell)
     {
-        foreach (var item in availableCells)
+        for (int i = 0; i < availableCells.Count; i++)
         {
-            if (item == emptyCell)
+            if (availableCells[i] == emptyCell)
                 return;
         }
         availableCells.Add(emptyCell);
@@ -64,10 +71,10 @@ public class HexaCell : Cell
     public void FindNeighbour()
     {
         isMarked = true;
-        foreach (var item in neighbours)
+        for (int i = 0; i < neighbours.Count; i++)
         {
-            if (!item.isMarked)
-                item.FindNeighbour();
+            if (!neighbours[i].isMarked)
+                neighbours[i].FindNeighbour();
         }
     }
     public void RemoveMe(HexaCell collision)
@@ -76,7 +83,7 @@ public class HexaCell : Cell
     }
     public bool CanIMove(HiveMember member)
     {
-        if (!hexaInfo.CanRemoveCell(this))
+        if (!SOInstances.SOHexaInfo.CanRemoveCell(this))
             return false;
         if (hiveMembersOnMe.Count == 0)
             return true;

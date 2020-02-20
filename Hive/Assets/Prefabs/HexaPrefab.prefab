@@ -94,12 +94,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61643df8ca752984481f5d9329714c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
   readyToUse: 0
   cellNum: 5
   masterCell:
   - {fileID: 3809139467244367457}
-  hexaCellNowOnMe: {fileID: 0}
 --- !u!54 &1995222166
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -223,12 +221,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61643df8ca752984481f5d9329714c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
   readyToUse: 0
   cellNum: 4
   masterCell:
   - {fileID: 3809139467244367457}
-  hexaCellNowOnMe: {fileID: 0}
 --- !u!54 &720184430
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -352,12 +348,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61643df8ca752984481f5d9329714c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
   readyToUse: 0
   cellNum: 3
   masterCell:
   - {fileID: 3809139467244367457}
-  hexaCellNowOnMe: {fileID: 0}
 --- !u!54 &1151353796
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -481,12 +475,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61643df8ca752984481f5d9329714c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
   readyToUse: 0
   cellNum: 1
   masterCell:
   - {fileID: 3809139467244367457}
-  hexaCellNowOnMe: {fileID: 0}
 --- !u!54 &765715331
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -610,12 +602,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61643df8ca752984481f5d9329714c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
   readyToUse: 0
   cellNum: 0
   masterCell:
   - {fileID: 3809139467244367457}
-  hexaCellNowOnMe: {fileID: 0}
 --- !u!54 &61153293
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -739,12 +729,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61643df8ca752984481f5d9329714c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
   readyToUse: 0
   cellNum: 2
   masterCell:
   - {fileID: 3809139467244367457}
-  hexaCellNowOnMe: {fileID: 0}
 --- !u!54 &863584914
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -851,8 +839,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 07475515098e7da488e3d53cbb3a8a26, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: bf1e8d5fc06aa3448927d470a56aaf8c, type: 3}
+  m_Color: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 0.3372549}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -874,7 +862,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916245345866bb04da705edcb203f1b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexaInfo: {fileID: 11400000, guid: 17311f5da846a364d96e609f9274c1f6, type: 2}
   readyToUse: 0
   availableCells:
   - {fileID: 1837416735526052170}

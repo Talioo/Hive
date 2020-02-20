@@ -13,7 +13,8 @@ public class Grasshopper : HiveMember
     }
     protected override void Unselect()
     {
-        possibleCells.ForEach(x => x.ReadyToUse(false));
+        for (int i = 0; i < possibleCells.Count; i++)
+            possibleCells[i].ReadyToUse(false);
         base.Unselect();
     }
     public override IEnumerator JumpToTarget(Cell newCell)
@@ -33,7 +34,7 @@ public class Grasshopper : HiveMember
             yield return null;
         }
         target.y = startPos.y;
-        hexaInfo.TryToRemoveCells();
+        SOInstances.SOHexaInfo.TryToRemoveCells();
         yield return null;
         NewMemberPosition(target);
     }

@@ -19,7 +19,6 @@
 
 namespace GoogleARCore.Examples.Common
 {
-    using System.Collections;
     using UnityEngine;
     using UnityEngine.UI;
     using UnityEngine.Video;

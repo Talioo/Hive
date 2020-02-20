@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class EmptyCell : Cell
 {
     public int cellNum;
     public List<HexaCell> masterCell;
+    public bool ReadyToUseValue { get; private set; }
 
     public override void Start()
     {
@@ -24,9 +24,9 @@ public class EmptyCell : Cell
     }
     public bool IsHexaCellNowOnMe()
     {
-        for (int i = 0; i < hexaInfo.hexaCellsOnScene.Count; i++)
+        for (int i = 0; i < SOInstances.SOHexaInfo.hexaCellsOnScene.Count; i++)
         {
-            if (Vector3.Distance(hexaInfo.hexaCellsOnScene[i].transform.position, transform.position) < Constants.DistanceToHexa)
+            if (Vector3.Distance(SOInstances.SOHexaInfo.hexaCellsOnScene[i].transform.position, transform.position) < Constants.DistanceToHexa)
                 return true;
         }
         return false;
@@ -37,13 +37,15 @@ public class EmptyCell : Cell
         {
             if (WillBreakHive())
                 return;
+            if (IsHexaCellNowOnMe())
+                return;
             if (SOInstances.GameManager.selectedHiveMember.MoveType == MoveType.Crawl)
-                if (!CanCrawlOnMe())
+                if (!SOInstances.SODuplicateCells.CanCrawlOnMe(this))
                     return;
         }
         if (value)
         {
-            var uniq = hexaInfo.duplicateCells.GetUniqCell(this);
+            var uniq = SOInstances.SODuplicateCells.GetUniqCell(this);
             if (uniq == this)
                 base.ReadyToUse(value);
             else
@@ -51,11 +53,21 @@ public class EmptyCell : Cell
         }
         else
             base.ReadyToUse(value);
-
+        ReadyToUseValue = value;
+    }
+    [ContextMenu("Test")]
+    void Test()
+    {
+        print("IsHexaCellNowOnMe: " + IsHexaCellNowOnMe());
+        print("CheckIsEmpty: " + CheckIsEmpty());
+        print("WillBreakHive: " + WillBreakHive());
+        print("CanCrawlOnMe: " + SOInstances.SODuplicateCells.CanCrawlOnMe(this));
     }
     bool WillBreakHive()
     {
         if (masterCell.Count > 1)
+            return false;
+        if (masterCell.Count == 0)
             return false;
         if (masterCell[0] != SOInstances.GameManager.selectedHiveMember.myCell)
             return false;
@@ -67,19 +79,6 @@ public class EmptyCell : Cell
     {
         if (masterCell[0].hiveMembersOnMe[0] != SOInstances.GameManager.selectedHiveMember)
             return false;
-        return true;
-    }
-    bool CanCrawlOnMe()
-    {
-        var mainCell = SOInstances.GameManager.selectedHiveMember.myCell;
-        int count = 0;
-        for (int i = 0; i < mainCell.neighbours.Count; i++)
-        {
-            if (masterCell.Find(x => x == mainCell.neighbours[i]) != null)
-                count++;
-            if (count == 2)
-                return false;
-        }
         return true;
     }
     private void OnDrawGizmos()
